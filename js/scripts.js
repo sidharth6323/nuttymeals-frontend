@@ -13,7 +13,7 @@ app.config(function($sceDelegateProvider) {
 app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
-  $scope.api_domain = "http://django-env.chzr4bty4v.us-west-2.elasticbeanstalk.com";
+  $scope.api_domain = "https://nuttymeals.pythonanywhere.com";
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
