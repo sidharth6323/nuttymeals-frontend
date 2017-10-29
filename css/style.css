@@ -5,6 +5,7 @@ html,body{
   padding: 0;
   background: #F3F7F8;
   font-family: 'Open Sans', sans-serif;
+  overflow-x: hidden;
 }
 a{
   border: none;
@@ -202,6 +203,7 @@ small{
 nav
 {
   height: 7%;
+  min-height: 58px;
   padding:1% 2%;
   background: #fff;
   display: flex;
@@ -271,6 +273,7 @@ nav .top-menu-container
 {
   background: url('../img/meal.jpg');
   height: 60%;
+  min-height: 496px;
   width: 100%;
   padding-top: 5%;
   padding-left: 5%;
@@ -338,6 +341,7 @@ nav .top-menu-container
 {
   height: 31%;
   width: 90%;
+  min-height: 257px;
   box-shadow: 0px 0px 30px 0.2px rgba(46,61,73,.15);
   margin-left: 5%;
   margin-top: -5%;
@@ -405,6 +409,7 @@ nav .top-menu-container
 {
   height: 50%;
   width: 90%;
+  min-height: 413px;
   box-shadow: 0px 0px 30px 0.2px rgba(46,61,73,.15);
   margin-left: 5%;
   margin-top: 5%;
