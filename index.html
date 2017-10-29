@@ -157,7 +157,7 @@
         <br />
         <div class="order">
           <h4>
-            <img src="img/{{current_plan[0].p_name}}.jpg" width="100"/>
+            <img src="img/{{current_plan[0].p_name}}.png" width="100"/>
            {{current_plan[0].p_name}}</br>
            <small>(<span ng-repeat="i in current_plan[0].meal_type track by $index" ng-if="isArray(current_plan[0].meal_type)">{{i}} {{$last ? '' : ', '}}</span><span ng-if="!isArray(current_plan[0].meal_type)">{{current_plan[0].meal_type}}</span>)</small>
          </h4>
