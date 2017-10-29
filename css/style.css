@@ -351,7 +351,9 @@ nav .top-menu-container
 .section2 .header
 {
   background: #9FC236;
-  width: 10%;
+  display: inline-block;
+  min-width: 130px;
+  //width: 10%;
   padding: 0.8% 2%;
 }
 .section2 .content
@@ -420,7 +422,9 @@ nav .top-menu-container
 .section4 .header
 {
   background: #F1AA40;
-  width: 10%;
+  display: inline-block;
+  min-width: 130px;
+  //width: 10%;
   padding: 0.8% 2%;
 }
 .section4 .content .plans-container
@@ -551,7 +555,9 @@ nav .top-menu-container
 .section6 .header
 {
   background: #3C4097;
-  width: 10%;
+  //width: 10%;
+  min-width: 130px;
+  display: inline-block;
   color:#fff;
   padding: 0.8% 2%;
 }
@@ -584,7 +590,9 @@ nav .top-menu-container
 .section7 .header
 {
   background: #DD0000;
-  width: 10%;
+  //width: 10%;
+  min-width: 130px;
+  display: inline-block;
   color:#fff;
   padding: 0.8% 2%;
 }
