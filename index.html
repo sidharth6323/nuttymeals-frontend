@@ -208,11 +208,11 @@
             </tr>
             <tr>
             <td>Success URI: </td>
-            <td colspan="3"><input name="surl"  size="64" value="http://localhost:8000/api/post/payment_success"  /></td>
+            <td colspan="3"><input name="surl"  size="64" value="{{api_domain}}/api/post/payment_success"  /></td>
             </tr>
             <tr>
             <td>Failure URI: </td>
-            <td colspan="3"><input name="furl"  size="64" value="http://localhost:8081/payment/failure.html"/></td>
+            <td colspan="3"><input name="furl"  size="64" value="{{api_domain}}/api/post/payment_failure"/></td>
             </tr>
             <td>Current URI: </td>
             <td colspan="3"><input name="curl"  size="64" value="http://localhost:8081/"/></td>
