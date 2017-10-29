@@ -174,7 +174,13 @@ app.controller("mainCtrl",function($scope,$http){
     });
     $scope.signupLoading=0;
   }
-
+  $scope.scroll_to = function(section){
+    $('#'+section+'_btn').on("click",function(){
+      $('html, body').animate({
+          scrollTop: $("#"+section).offset().top-100
+      }, 800);
+    });
+  }
   $scope.select_plan=function(id){
     $scope.plan_modal=1;
       $scope.current_plan = $scope.allPlans.filter(function( obj ) {

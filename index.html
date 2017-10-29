@@ -236,19 +236,19 @@
     <img class="icon" src="img/icon.JPG" />
     <div class="top-menu-container">
       <ul>
-        <li>
+        <li id="about_btn" ng-click="scroll_to('about')">
           About
         </li>
-        <li>
+        <li id="how_btn" ng-click="scroll_to('how')">
           How it Works?
         </li>
-        <li>
+        <li id="why_btn" ng-click="scroll_to('why')">
           Why Us?
         </li>
-        <li>
+        <li id="faq_btn" ng-click="scroll_to('faq')">
           FAQ's
         </li>
-        <li>
+        <li id="contact_btn" ng-click="scroll_to('contact')">
           Contact Us
         </li>
         <li>
@@ -291,7 +291,7 @@
               <input type="button" value="View Menu" />
             </div>
           </a>
-          <div class="boxinput-container menu" >
+          <div class="boxinput-container menu" ng-click="scroll_to('plan')" id="plan_btn">
             <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
             <input type="button" value="Explore Plans" />
           </div>
@@ -303,7 +303,7 @@
       </div>
     </div>
   </div>
-  <div class="section2">
+  <div class="section2" id="how">
     <div class="header">
       <span>How it Works ?</span>
     </div>
@@ -326,13 +326,13 @@
       </div>
     </div>
   </div>
-  <div class="section3">
+  <div class="section3" id="about">
     <h1>About Us</h1>
     <p>
       People not getting adequate food throughout the day according to their taste and wishes is an issue to think over. NuttyMeals sort this problem out by delivering delicious and hygienic food to you at the best prices. We assure about best services and quality. Our authenticity will bring you to us time and again. Pocket friendly rates in exchange of a qualitative presentation is what we term ourselves as. For all you office people out there, we have a delightful offer especially for you.Visit us and place your eyes on our menu to get through the same.<br /><span> We are happy to serve as per your expectations so do visit us for sure !</span>
     </p>
   </div>
-  <div class="section4">
+  <div class="section4" id="plan">
     <div class="header">
       <span>Our Plans</span>
     </div>
@@ -359,7 +359,7 @@
       </div>
     </div>
   </div>
-  <div class="section5">
+  <div class="section5" id="why">
     <div class="header">
       <h1>Why Us ?</h1>
     </div>
@@ -404,7 +404,7 @@
       </div>
     </div>
   </div>
-  <div class="section6">
+  <div class="section6" id="faq">
     <div class="header">
       <span>FAQ's</span>
     </div>
@@ -444,7 +444,7 @@
       </div>
     </div>
   </div>
-  <div class="section7">
+  <div class="section7" id="contact">
     <div class="header">
       <span>Contact Us</span>
     </div>
