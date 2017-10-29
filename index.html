@@ -102,7 +102,7 @@
         <i class="fa fa-times pull-right" aria-hidden="true" ng-click="plan_modal=0"></i>
       </div>
       <div class="modal-header">
-        <img src="img/{{current_plan[0].p_name}}.jpg" width="100"/>
+        <img src="img/{{current_plan[0].p_name}}.png" width="100"/>
         <h2>
          {{current_plan[0].p_name}}</br>
          <small>(<span ng-repeat="i in current_plan[0].meal_type track by $index" ng-if="isArray(current_plan[0].meal_type)">{{i}} {{$last ? '' : ', '}}</span><span ng-if="!isArray(current_plan[0].meal_type)">{{current_plan[0].meal_type}}</span>)</small>
@@ -340,7 +340,7 @@
       <div class="plans-container">
         <div class="plan" ng-click="select_plan(plan.id)" ng-repeat="plan in allPlans | filter:{'duration':duration}">
           <div class="planImg">
-            <img src="img/{{plan.p_name}}.jpg" width="150" style="drop-shadow:10px 10px 10px #000"/>
+            <img src="img/{{plan.p_name}}.png" width="150" style="drop-shadow:10px 10px 10px #000"/>
           </div>
           <h4>&#8377 {{plan.price}} </h4>
           <span>{{plan.p_name}}<br /> <small>(<span ng-repeat="i in plan.meal_type track by $index" ng-if="isArray(plan.meal_type)">{{i}} {{$last ? '' : ', '}}</span><span ng-if="!isArray(plan.meal_type)">{{plan.meal_type}}</span>)</small></span>
@@ -474,7 +474,7 @@
   </div>
   <footer>
     <div class="icon">
-      <img src="img/logo-brown.png" width="200px" height="65px"/>
+      <img src="img/icon.JPG" width="200px" height="65px"/>
     </div>
     <div class="buttons">
       <p>About Us</p>
