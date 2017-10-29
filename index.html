@@ -1,0 +1,495 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Nutty Meals</title>
+  <meta name="description" content="NuttyMeals">
+  <meta name="author" content="SitePoint">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:30" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-sanitize.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body ng-app="nuttymeals" ng-controller="mainCtrl" ng-init="initApp()">
+  <div class="modal-container" ng-show="activeModal=='login'">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>
+          <i class="fa fa-circle-o-notch rotateanim" aria-hidden="true" ng-show="loginLoading"></i>
+          <i class="fa fa-sign-in" aria-hidden="true" ng-show="!loginLoading"></i>
+         &nbsp LOGIN TO YOUR ACCOUNT</h3>
+         <i class="fa fa-times pull-right" aria-hidden="true" ng-click="activeModal=''"></i>
+      </div>
+      <div class="modal-content">
+        <div class="form-error" ng-show="loginError">
+          <span>{{loginError}}</span>
+        </div>
+        <form class="loginForm" ng-submit="login()">
+          <div class="input-container">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input type="text" ng-model="username" required placeholder="Enter your Username" required />
+          </div>
+          <div class="input-container">
+            <i class="fa fa-key" aria-hidden="true"></i>
+            <input type="password" ng-model="password" required placeholder="Enter your Password" required />
+          </div>
+          <div class="input-container">
+            <input type="submit" value="LOGIN" />
+          </div>
+          <small ng-click="activeModal='signup'">Don't have an account?  Signup</small>
+          <br />
+          <small>or</small>
+        </form>
+        <div class="app-download">
+          <img src="img/play_store.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-container" ng-show="activeModal=='signup'">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>
+          <i class="fa fa-circle-o-notch" aria-hidden="true" ng-show="signupLoading"></i>
+          <i class="fa fa-user-plus" aria-hidden="true" ng-show="!signupLoading"></i>
+         &nbsp CREATE AN ACCOUNT</h3>
+         <i class="fa fa-times pull-right" aria-hidden="true" ng-click="activeModal=''"></i>
+      </div>
+      <div class="modal-content">
+        <form class="loginForm" ng-submit="signup()">
+          <div class="input-container">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <input type="email" ng-model="email" required placeholder="Enter your Email" />
+          </div>
+          <div class="input-container">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input type="text" required ng-model="username" placeholder="Enter your Username" />
+          </div>
+          <div class="input-container">
+            <i class="fa fa-key" aria-hidden="true"></i>
+            <input type="password" required ng-model="password" placeholder="Enter your Password" />
+          </div>
+          <div class="input-container">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            <input type="number" required ng-model="phone" placeholder="Enter your Phone No." />
+          </div>
+          <div class="input-container">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input type="text" required ng-model="referral" placeholder="Enter Referral Code (Optional)" />
+          </div>
+          <div class="input-container">
+            <input type="submit" value="SIGNUP" />
+          </div>
+          <small ng-click="activeModal='login'">Already have an account?  Login</small>
+          <br />
+          <small>or</small>
+        </form>
+        <div class="app-download">
+          <img src="img/play_store.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-container" ng-show="plan_modal">
+    <div class="modal plan-modal">
+      <div>
+        <i class="fa fa-times pull-right" aria-hidden="true" ng-click="plan_modal=0"></i>
+      </div>
+      <div class="modal-header">
+        <img src="img/{{current_plan[0].p_name}}.jpg" width="100"/>
+        <h2>
+         {{current_plan[0].p_name}}</br>
+         <small>(<span ng-repeat="i in current_plan[0].meal_type track by $index" ng-if="isArray(current_plan[0].meal_type)">{{i}} {{$last ? '' : ', '}}</span><span ng-if="!isArray(current_plan[0].meal_type)">{{current_plan[0].meal_type}}</span>)</small>
+       </h2>
+       <div class="price pull-right">
+         &#8377 {{current_plan[0].price}}
+         <small>(inclusive of all taxes)</small>
+       </div>
+      </div>
+      <div class="modal-content">
+        <p class="description" ng-bind-html="current_plan[0].info">
+        </p>
+        <span ng-show="current_plan[0].delivery_charge">Delivery Charge : &#8377 {{current_plan[0].delivery_charge}}</span>
+      </div>
+      <div class="modal-footer">
+        <a href="/img/menu.jpeg" target="_blank">
+          <div class="boxinput-container pull-left" >
+            <i class="fa fa-bars" aria-hidden="true"></i>
+            <input type="button" value="View Menu" />
+          </div>
+        </a>
+        <div class="place_order">
+          <div class="input-container delivery" ng-init="delivery=true" ng-show="current_plan[0].delivery_charge">
+            <input type="checkbox" checked ng-model="delivery"/>
+            <span>Delivery</span>
+          </div>
+          <div class="input-container qty" ng-init="qty=1">
+            <span>Quantity :</span>
+            <input type="number" max="5" ng-model="qty" min="1" disabled required placeholder="Enter Qty" />
+            <i class="fa fa-plus-circle" ng-click="qty= qty==5?qty:qty+1" aria-hidden="true"></i>
+            <i class="fa fa-minus-circle" ng-click="qty= qty==1?qty:qty-1" aria-hidden="true"></i>
+          </div>
+          <div class="boxinput-container beige-btn" >
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            <input type="button" value="Login and Subscribe" ng-show="!loggedIn==1" ng-click="activeModal='login';plan_modal=0"/>
+            <input type="button" value="Continue" ng-show="loggedIn==1" ng-click="place_order()" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-container" ng-show="activeModal=='place_order'">
+    <div class="modal  order_modal">
+      <div class="modal-header">
+        <i class="fa fa-chevron-left pull-left back_btn" aria-hidden="true" ng-click="activeModal='';plan_modal=1;delivery=true"></i>
+        <h3>
+          <i class="fa fa-sign-in" aria-hidden="true" ng-show="!loginLoading"></i>
+         &nbsp Place Order</h3>
+         <i class="fa fa-times pull-right" aria-hidden="true" ng-click="activeModal=''"></i>
+      </div>
+      <div class="modal-content">
+        <br />
+        <div class="order">
+          <h4>
+            <img src="img/{{current_plan[0].p_name}}.jpg" width="100"/>
+           {{current_plan[0].p_name}}</br>
+           <small>(<span ng-repeat="i in current_plan[0].meal_type track by $index" ng-if="isArray(current_plan[0].meal_type)">{{i}} {{$last ? '' : ', '}}</span><span ng-if="!isArray(current_plan[0].meal_type)">{{current_plan[0].meal_type}}</span>)</small>
+         </h4>
+         <span class="qty">Quantity<br />{{qty}}</span>
+         <span class="final_price">Price<br />&#8377 {{final_order_price}}</span>
+        </div>
+        <form id="addressForm">
+          <div class="address">
+            <div class="text-input-container">
+              <div class="input-container">
+                <span>Address Line 1 :</span>
+                <input type="text" required placeholder="Enter your Address" ng-model="address1" />
+              </div>
+              <div class="input-container">
+                <span>Address Line 2 :</span>
+                <input type="text" required placeholder="Enter your Address" ng-model="address2" />
+              </div>
+              <div class="input-container">
+                <span>Pin Code :</span>
+                <input type="number" required placeholder="Enter your pincode" maxlength="6" ng-model="pincode" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <form action="{{hash_data.action}}"  name="payuform" id="payuform" method="post" ng-submit="payuform_submit($event)" style="display:none">
+          <input type="hidden" name="key" value="{{hash_data.posted.key}}" />
+          <input type="hidden" name="hash_string" value="{{hash_data.hash_string}}" />
+          <input type="hidden" name="hash"  value="{{hash_data.hashh}}"/>
+          <input type="hidden" name="txnid" value="{{hash_data.txnid}}"/>
+          <table >
+            <tr>
+            <td>Amount: </td>
+            <td><input name="amount" ng-value="hash_data.posted.amount" /></td>
+            <td>First Name: </td>
+            <td><input name="firstname" id="firstname" value="{{hash_data.posted.firstname}}"  /></td>
+            </tr>
+            <tr>
+            <td>Email: </td>
+            <td><input name="email" id="email" value="{{hash_data.posted.email}}"  /></td>
+            <td>Phone: </td>
+            <td><input name="phone"  value="{{currentUser.phone}}"/></td>
+            </tr>
+            <tr>
+            <td>Product Info: </td>
+            <td colspan="3"><textarea name="productinfo">{{hash_data.posted.product_info}}</textarea></td>
+            </tr>
+            <tr>
+            <td>Success URI: </td>
+            <td colspan="3"><input name="surl"  size="64" value="http://localhost:8000/api/post/payment_success"  /></td>
+            </tr>
+            <tr>
+            <td>Failure URI: </td>
+            <td colspan="3"><input name="furl"  size="64" value="http://localhost:8081/payment/failure.html"/></td>
+            </tr>
+            <td>Current URI: </td>
+            <td colspan="3"><input name="curl"  size="64" value="http://localhost:8081/"/></td>
+            </tr>
+            <tr>
+            <td colspan="3"><input type="hidden" name="service_provider" value="" /></td>
+            </tr>
+          </table>
+          <input type="submit" value="Submit"  />
+        </form>
+          <div class="boxinput-container beige-btn" >
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+
+            <input type="button" value="Login and Subscribe" ng-show="!loggedIn==1" ng-click="activeModal='login';plan_modal=0"/>
+            <input type="submit" value="Pay and Subscribe" form="payuform" ng-show="loggedIn==1"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <img class="icon" src="img/icon.jpg" />
+    <div class="top-menu-container">
+      <ul>
+        <li>
+          About
+        </li>
+        <li>
+          How it Works?
+        </li>
+        <li>
+          Why Us?
+        </li>
+        <li>
+          FAQ's
+        </li>
+        <li>
+          Contact Us
+        </li>
+        <li>
+          NuttyBites
+        </li>
+        <li class="account" ng-click="activeModal='login'" ng-show="loggedIn==0">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+          Login
+        </li>
+        <li class="account" ng-click="userMenu=!userMenu" ng-show="loggedIn==1">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          {{currentUser.user.username}}
+          <div class="account-menu" ng-show="userMenu">
+            <div class="menu">
+              <div class="menu-item">
+                My Orders
+              </div>
+              <div class="menu-item" ng-click="logout()">
+                Logout
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="section1">
+    <div class="content">
+      <div class="content-container">
+        <div class="video-container" ng-click="load_video()">
+          <i class="fa fa-play-circle" aria-hidden="true"></i>
+          <img src="img/video-start.png" width="500"/>
+        </div>
+        <div class="text-container">
+          <h1>Get the food of your day delivered at your doorsteps.</h1>
+          <h3>Variety of plans starting from just &#8377 39</h3>
+          <a href="img/menu.jpeg" target="_blank">
+            <div class="boxinput-container menu" >
+              <i class="fa fa-bars" aria-hidden="true"></i>
+              <input type="button" value="View Menu" />
+            </div>
+          </a>
+          <div class="boxinput-container menu" >
+            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+            <input type="button" value="Explore Plans" />
+          </div>
+          <div class="boxinput-container signup menu" ng-click="activeModal='signup'" ng-show="loggedIn==0">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            <input type="button" value="Signup" ng-click="activeModal='signup'" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section2">
+    <div class="header">
+      <span>How it Works ?</span>
+    </div>
+    <div class="content">
+      <div class="container">
+        <img src="img/how1.jpg" />
+        <span>Visit Nutrimeals <br />App/Website</span>
+      </div>
+      <div class="container">
+        <img src="img/how2.jpg" />
+        <span>Choose a Dish/Plan</span>
+      </div>
+      <div class="container">
+        <img src="img/how3.jpg" />
+        <span>Chef's cook</span>
+      </div>
+      <div class="container">
+        <img src="img/how4.jpg" />
+        <span>We Deliver !</span>
+      </div>
+    </div>
+  </div>
+  <div class="section3">
+    <h1>About Us</h1>
+    <p>
+      People not getting adequate food throughout the day according to their taste and wishes is an issue to think over. NuttyMeals sort this problem out by delivering delicious and hygienic food to you at the best prices. We assure about best services and quality. Our authenticity will bring you to us time and again. Pocket friendly rates in exchange of a qualitative presentation is what we term ourselves as. For all you office people out there, we have a delightful offer especially for you.Visit us and place your eyes on our menu to get through the same.<br /><span> We are happy to serve as per your expectations so do visit us for sure !</span>
+    </p>
+  </div>
+  <div class="section4">
+    <div class="header">
+      <span>Our Plans</span>
+    </div>
+    <div class="content">
+      <div class="plans-container">
+        <div class="plan" ng-click="select_plan(plan.id)" ng-repeat="plan in allPlans | filter:{'duration':duration}">
+          <div class="planImg">
+            <img src="img/{{plan.p_name}}.jpg" width="150" style="drop-shadow:10px 10px 10px #000"/>
+          </div>
+          <h4>&#8377 {{plan.price}} </h4>
+          <span>{{plan.p_name}}<br /> <small>(<span ng-repeat="i in plan.meal_type track by $index" ng-if="isArray(plan.meal_type)">{{i}} {{$last ? '' : ', '}}</span><span ng-if="!isArray(plan.meal_type)">{{plan.meal_type}}</span>)</small></span>
+        </div>
+      </div>
+      <div class="timings">
+        <div class="time" ng-class="{'active':time=='monthly'}" ng-click="duration=30;time='monthly'">
+          <span>Monthly</span>
+        </div>
+        <div class="time" ng-click="duration=14;time='2weeks'" ng-class="{'active':time=='2weeks'}">
+          <span>2 Weeks</span>
+        </div>
+        <div class="time" ng-click="duration=1;time='1time'" ng-class="{'active':time=='1time'}">
+          <span>One Time</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section5">
+    <div class="header">
+      <h1>Why Us ?</h1>
+    </div>
+    <div class="content">
+      <div class="card">
+        <div class="card-container card1">
+          <img src="img/variety.png" width="200" height="140" />
+          <div class="card-content">
+            <h2><span>01</span> Wide Variety</h2>
+            <p>
+              None of the Dishes are repeated for 2 weeks.
+            </p>
+          </div>
+        </div>
+        <div class="card-container card2">
+          <img src="img/oil.png" width="180" height="140"/>
+          <div class="card-content content2">
+            <h2><span>02</span> Finger Licking Taste</h2>
+            <p>
+              Adequate amount of Oil/spices to produce quality home made food.
+            </p>
+          </div>
+        </div>
+        <div class="card-container card3">
+          <img src="img/delivery.png" width="150" height="140" />
+          <div class="card-content content3">
+            <h2><span>03</span> Hygienic and professional</h2>
+            <p>
+              Delivery will be done in Clean, Hot and Hygienic Tiffin Boxes.
+            </p>
+          </div>
+        </div>
+        <div class="card-container card4">
+          <img src="img/refund.png" width="160" height="140"/>
+          <div class="card-content content4">
+            <h2><span>04</span> Easy Ordering and Cancelling</h2>
+            <p>
+              Ordering and Cancelling takes minutes and hassle free refund.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section6">
+    <div class="header">
+      <span>FAQ's</span>
+    </div>
+    <div class="content">
+      <div class="question">
+        <h5>1. Why should you choose us?</h5>
+        <span>We work as per and for the customer. Serving you with the perfect blend of the mixtures and spices at the least possible cost is our forte.</span>
+      </div>
+      <div class="question">
+        <h5>2. What are our operation timings?</h5>
+        <span>We serve breakfast from 7:30 am to 8:30 am
+              our lunch timings are from 12:30 pm to 1:30 pm
+              and, we serve dinner from 7:30 am to 8:30 pm
+        </span>
+      </div>
+      <div class="question">
+        <h5>3. What is the price of our meals? Are there any special offers for office working people or certain deals? </h5>
+        <span>The full meal packages amount to Rs.3999 but can be reduced down to Rs.3799 for 30 days. And for 15 days, the amount is Rs.1999.
+          The office employees can opt for the breakfast and dinner combo meals which actually cost Rs.2999 but they can avail the early bird discount which will reduce the meal cost to Rs.1399.
+        </span>
+      </div>
+      <div class="question">
+        <h5>4. What is the credibility of your visual gallery?</h5>
+        <span>We simply abide by the rule of actually serving what all we portray through images. All our pictures are taken while they are being prepared only with quality spices and ingredients. </span>
+      </div>
+      <div class="question">
+        <h5>5. What are our areas of operation?</h5>
+        <span>Right now we revolve around places in and near Rajareshwari Nagar only. We will be expanding our wings to other places soon. </span>
+      </div>
+      <div class="question">
+        <h5>6. Are there any delivery charges? </h5>
+        <span>No, we do not charge anything extra for the delivery.</span>
+      </div>
+      <div class="question">
+        <h5>7. Will you abide by any changes as per the customer convenience? </h5>
+        <span>Yes. For example, if you cancel the meal, all you need to do is inform us 12 hours before. The amount of the cancelled meal will be forwarded to the next subscription period. If you wish t get the meal delivered at some other place, you should inform us atleast 3 hours before the delivery schedule.</span>
+      </div>
+    </div>
+  </div>
+  <div class="section7">
+    <div class="header">
+      <span>Contact Us</span>
+    </div>
+    <div class="content">
+      <form action="">
+        <div class="input-container">
+          <span>Email :</span>
+          <input type="email" required placeholder="Enter your email" />
+        </div>
+        <div class="input-container">
+          <span>Your message :</span>
+          <textarea rows="8" cols="33" placeholder="Enter your message" required></textarea>
+        </div>
+        <div class="input-container">
+          <input type="submit" value="Submit" />
+        </div>
+      </form>
+      <div class="social">
+        <span> Reach Us on:</span>
+        <div class="icon-container">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="icon">
+      <img src="img/logo-brown.png" width="200px" height="65px"/>
+    </div>
+    <div class="buttons">
+      <p>About Us</p>
+      <p>How it Works?</p>
+      <p>Why Us?</p>
+      <p>FAQ's</p>
+      <p>Contact Us</p>
+    </div>
+    <div class="social">
+      <i class="fa fa-facebook" aria-hidden="true"></i>
+      <i class="fa fa-twitter" aria-hidden="true"></i>
+      <i class="fa fa-linkedin" aria-hidden="true"></i>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+</html>
