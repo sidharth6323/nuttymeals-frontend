@@ -13,6 +13,7 @@ app.config(function($sceDelegateProvider) {
 app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
+  $scope.api_domain = "http://django-env.chzr4bty4v.us-west-2.elasticbeanstalk.com";
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
@@ -64,7 +65,7 @@ app.controller("mainCtrl",function($scope,$http){
     {
       $http({
         method:"POST",
-        url : "http://localhost:8000/api/get/payu_hash",
+        url : $scope.api_domain + "/api/get/payu_hash",
         data : {email:$scope.currentUser.user.email,amount:$scope.final_order_price,product_info:$scope.current_plan[0].p_name,firstname:$scope.currentUser.user.username,udf1:"address"},
         headers: {'Authorization': "Token "+session}
       }).then(function(response){
@@ -98,7 +99,7 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.getPlans = function(){
     $http({
       method:"GET",
-      url : "http://localhost:8000/api/get/all_plans",
+      url : $scope.api_domain + "/api/get/all_plans",
     }).then(function(response){
       console.log(response.data);
       $scope.allPlans=response.data;
@@ -123,7 +124,7 @@ app.controller("mainCtrl",function($scope,$http){
     {
       $http({
         method:"GET",
-        url : "http://localhost:8000/api/get/user",
+        url : $scope.api_domain + "/api/get/user",
         headers: {'Authorization': "Token "+session}
       }).then(function(response){
         console.log(response.data);
@@ -143,7 +144,7 @@ app.controller("mainCtrl",function($scope,$http){
     $scope.loginLoading=1;
     $http({
       method:"POST",
-      url : "http://localhost:8000/api/login/",
+      url : $scope.api_domain + "/api/login/",
       data:{"username":$scope.username,"password":$scope.password}
     }).then(function(response){
       document.cookie = "s_id="+response.data.token;
@@ -162,7 +163,7 @@ app.controller("mainCtrl",function($scope,$http){
     $scope.signupLoading=1;
     $http({
       method:"POST",
-      url : "http://localhost:8000/api/signup/",
+      url : $scope.api_domain + "/api/signup/",
       data:{"email":$scope.email,"username":$scope.username,"password":$scope.password,"phone":$scope.phone,"referral_code_signup":$scope.referral}
     }).then(function(response){
       $scope.username=response.data.user.username;
