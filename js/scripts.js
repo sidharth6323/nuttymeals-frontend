@@ -14,6 +14,7 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
   $scope.api_domain = "https://nuttymeals.pythonanywhere.com";
+  //$scope.api_domain = "http://localhost:8000"
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
@@ -58,6 +59,20 @@ app.controller("mainCtrl",function($scope,$http){
       e.preventDefault();
       alert("Please Fill all the address fields!")
     }
+    else {
+      e.preventDefault();
+      $scope.get_payuhash();
+    }
+  }
+  $scope.set_delivery_status = function(){
+    console.log("status_set")
+    if(!$scope.current_plan[0].delivery_charge)
+    {
+      $scope.delivery=false;
+    }
+    else {
+      $scope.delivery=true;
+    }
   }
   $scope.get_payuhash = function(){
     var session = getCookie('s_id');
@@ -66,11 +81,14 @@ app.controller("mainCtrl",function($scope,$http){
       $http({
         method:"POST",
         url : $scope.api_domain + "/api/get/payu_hash",
-        data : {email:$scope.currentUser.user.email,amount:$scope.final_order_price,product_info:$scope.current_plan[0].p_name,firstname:$scope.currentUser.user.username,udf1:"address"},
+        data : {email:$scope.currentUser.user.email,amount:$scope.final_order_price,product_info:$scope.current_plan[0].p_name,firstname:$scope.currentUser.user.username,udf1:$scope.address1+", "+$scope.address2+", "+$scope.pincode,udf2:$scope.qty,udf3:$scope.delivery},
         headers: {'Authorization': "Token "+session}
       }).then(function(response){
         console.log(response.data);
         $scope.hash_data = response.data;
+        console.log("ainwayi");
+        console.log("hhg");
+        setTimeout(function(){document.getElementById("payuform").submit();},2000);
       },function(){
         console.log("error in getting hash");
       });
@@ -91,7 +109,6 @@ app.controller("mainCtrl",function($scope,$http){
     else {
       $scope.final_order_price = $scope.qty*$scope.current_plan[0].price;
     }
-    $scope.get_payuhash();
   }
 
 
@@ -187,6 +204,7 @@ app.controller("mainCtrl",function($scope,$http){
         return obj.id == id;
       });
       console.log($scope.current_plan);
+      $scope.set_delivery_status();
   }
 
 });
