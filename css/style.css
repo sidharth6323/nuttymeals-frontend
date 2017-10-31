@@ -11,10 +11,97 @@ a{
   border: none;
   text-decoration: none;
 }
+input:focus,textarea:focus
+{
+  outline: none;
+}
 [ng-click],
 [data-ng-click],
 [x-ng-click] {
     cursor: pointer;
+}
+@media only screen and (max-device-width: 480px) and (min-device-width: 320px)
+{
+  .sm-hidden
+  {
+    display: none!important;
+  }
+  nav .icon {
+    width: 44%!important;
+    height: 89%!important;
+  }
+  .section1 .content-container .text-container {
+    width: 77%!important;
+  }
+  .section2
+  {
+    height: auto!important;
+  }
+  .section2 .header
+  {
+    padding: 3.8% 2%!important;
+    margin-bottom: 7%!important;
+  }
+  .section2 .content {
+    flex-direction: column;
+  }
+  .section4
+  {
+    height: auto!important;
+  }
+  .section4 .header
+  {
+    padding: 3.8% 2%!important;
+  }
+  .section4 .content .plans-container
+  {
+    flex-direction: column;
+  }
+  .section4 .content .plans-container .plan
+  {
+    margin-bottom: 13%!important;
+  }
+  .section4 .content .timings {
+    width: 85%!important;
+    margin: 2% auto 6%!important;
+  }
+  .section5 .header
+  {
+    margin-bottom: 30%;
+  }
+  .section5 .content .card
+  {
+    width: 100%!important;
+    flex-direction: column;
+  }
+  .section5 .content .card .card-container
+  {
+    width: 98%!important;
+    margin-bottom: 26%!important;
+  }
+  .section6 .header
+  {
+    padding: 3.8% 2%!important;
+    margin-bottom: 7%!important;
+  }
+  .section6 .content .question {
+    margin: 9% 0!important;
+  }
+  .section7 .header
+  {
+    padding: 3.8% 2%!important;
+    margin-bottom: 7%!important;
+  }
+  .section7 .content form {
+    width: 109%!important;
+    border-right: none!important;
+  }
+  footer .social {
+    width: 100%!important;
+    text-align: center;
+    display: flex!important;
+    justify-content: space-around;
+  }
 }
 @keyframes rotate{
   0%{
@@ -171,19 +258,38 @@ small{
 {
   border: 1px solid #ddd;
   height: 32px;
+  background: rgba(255,255,255,0.3);
   padding: 0 12px;
   font-size: 0.8em;
   transition: all ease 0.15s;
 }
+.input-container input::placeholder
+{
+  font-weight: lighter;
+  color: #c7c7c7;
+}
+.input-container textarea
+{
+  background: rgba(255,255,255,0.3);
+}
+.input-container textarea::placeholder
+{
+  color: #c7c7c7;
+  font-weight: lighter;
+}
 .input-container input:focus
 {
-  background: #fcfcfc;
+  background: #fff;
 }
 .input-container textarea
 {
   border: 1px solid #e6e3f9;
   padding: 9px 12px;
   font-size: 0.8em;
+}
+.input-container textarea:focus
+{
+  background: white;
 }
 .input-container span
 {
@@ -196,7 +302,7 @@ small{
 {
   background: #ddd;
   color: #000;
-  padding: 2% 4%;
+  padding: 1% 4%;
 }
 
 
@@ -630,6 +736,10 @@ nav .top-menu-container
   align-items: center;
   margin-left: 5%;
   width: 35%;
+}
+.section7 .content .social .icon-container i
+{
+  color: #BBB;
 }
 .section7 .content .social .icon-container
 {
