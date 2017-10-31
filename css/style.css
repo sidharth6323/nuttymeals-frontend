@@ -36,6 +36,7 @@ input:focus,textarea:focus
   .section2
   {
     height: auto!important;
+    margin-top: -15%!important;
   }
   .section2 .header
   {
