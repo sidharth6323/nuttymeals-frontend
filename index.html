@@ -104,7 +104,7 @@
         <i class="fa fa-times pull-right" aria-hidden="true" ng-click="plan_modal=0"></i>
       </div>
       <div class="modal-header">
-        <img src="img/{{current_plan[0].p_name}}.png" width="100"/>
+        <img class="sm-hidden" src="img/{{current_plan[0].p_name}}.png" width="100"/>
         <h2>
          {{current_plan[0].p_name}}</br>
          <small>(<span ng-repeat="i in current_plan[0].meal_type track by $index" ng-if="isArray(current_plan[0].meal_type)">{{i}} {{$last ? '' : ', '}}</span><span ng-if="!isArray(current_plan[0].meal_type)">{{current_plan[0].meal_type}}</span>)</small>
@@ -118,20 +118,24 @@
         <p class="description" ng-bind-html="current_plan[0].info">
         </p>
         <span ng-show="current_plan[0].delivery_charge">Delivery Charge : &#8377 {{current_plan[0].delivery_charge}}</span>
+        <div class="input-container delivery only-sm" ng-show="current_plan[0].delivery_charge">
+          <input type="checkbox" checked ng-model="delivery"/>
+          <span>Delivery</span>
+        </div>
       </div>
       <div class="modal-footer">
         <a href="/img/menu.jpeg" target="_blank">
-          <div class="boxinput-container pull-left" >
+          <div class="boxinput-container pull-left sm-hidden" >
             <i class="fa fa-bars" aria-hidden="true"></i>
             <input type="button" value="View Menu" />
           </div>
         </a>
         <div class="place_order">
-          <div class="input-container delivery" ng-show="current_plan[0].delivery_charge">
+          <div class="input-container delivery sm-hidden" ng-show="current_plan[0].delivery_charge">
             <input type="checkbox" checked ng-model="delivery"/>
             <span>Delivery</span>
           </div>
-          <div class="input-container qty" ng-init="qty=1">
+          <div class="input-container qty " ng-init="qty=1">
             <span>Quantity :</span>
             <input type="number" max="5" ng-model="qty" min="1" disabled required placeholder="Enter Qty" />
             <i class="fa fa-plus-circle" ng-click="qty= qty==5?qty:qty+1" aria-hidden="true"></i>
@@ -164,7 +168,7 @@
            <small>(<span ng-repeat="i in current_plan[0].meal_type track by $index" ng-if="isArray(current_plan[0].meal_type)">{{i}} {{$last ? '' : ', '}}</span><span ng-if="!isArray(current_plan[0].meal_type)">{{current_plan[0].meal_type}}</span>)</small>
          </h4>
          <span class="qty">Quantity<br />{{qty}}</span>
-         <span class="final_price">Price<br />&#8377 {{final_order_price}}</span>
+         <span class="final_price sm-hidden">Price<br />&#8377 {{final_order_price}}</span>
         </div>
         <form id="addressForm">
           <div class="address">

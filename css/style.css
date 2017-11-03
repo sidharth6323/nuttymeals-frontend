@@ -20,11 +20,19 @@ input:focus,textarea:focus
 [x-ng-click] {
     cursor: pointer;
 }
+.only-sm
+{
+  display: none;
+}
 @media only screen and (max-device-width: 480px) and (min-device-width: 320px)
 {
   .sm-hidden
   {
     display: none!important;
+  }
+  .only-sm
+  {
+    display: block;
   }
   nav .icon {
     width: 44%!important;
@@ -102,6 +110,37 @@ input:focus,textarea:focus
     text-align: center;
     display: flex!important;
     justify-content: space-around;
+  }
+  .modal-container .plan-modal
+  {
+    width: 90%!important;
+  }
+  .modal-container .plan-modal .modal-footer .sm-hidden
+  {
+    display: none!important;
+  }
+  .plan-modal .modal-header .price
+  {
+    margin-left: 14%!important;
+    width: 211%!important;
+  }
+  .plan-modal .modal-content p
+  {
+    text-align: center!important;
+  }
+  .plan-modal .modal-content .delivery
+  {
+    display: flex;
+    align-items: center;
+    margin: 0!important;
+  }
+  .modal-container .order_modal
+  {
+    width: 90%!important;
+  }
+  .modal-container .order_modal .modal-content .order
+  {
+    flex-direction: column!important;
   }
 }
 @keyframes rotate{
