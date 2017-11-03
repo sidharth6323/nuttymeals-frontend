@@ -134,26 +134,6 @@ input:focus,textarea:focus
     align-items: center;
     margin: 0!important;
   }
-  .modal-container .order_modal
-  {
-    width: 90%!important;
-  }
-  .modal-container .order_modal .modal-content .order
-  {
-    flex-direction: column!important;
-  }
-  .modal-container .order_modal .modal-content .order h4
-  {
-    margin: 0!important;
-  }
-  .modal-container .order_modal .modal-content .order .qty
-  {
-    margin-left: 18%!important;
-  }
-  .modal-container .order_modal .modal-content .order .final_price
-  {
-    margin-left: 22%;
-  }
   .plan-modal .modal-content .qty
   {
     display:inline-flex;
@@ -196,6 +176,33 @@ input:focus,textarea:focus
     width: auto;
     margin-left:2%;
   }
+  .modal-container .order_modal
+  {
+    width: 90%!important;
+  }
+  .modal-container .order_modal .modal-content .order
+  {
+    flex-direction: column!important;
+  }
+  .modal-container .order_modal .modal-content .order h4
+  {
+    margin: 0!important;
+  }
+  .modal-container .order_modal .modal-content .order .qty
+  {
+    margin-left: 18%!important;
+    margin-bottom: 2%!important;
+  }
+  .modal-container .order_modal .modal-content .order .final_price
+  {
+    margin-left: 22%;
+    margin-bottom: 2%!important;
+  }
+  .modal-container .order_modal .modal-content .addressForm .input-container span
+  {
+        width: 101px!important;
+  }
+
 
 }
 @keyframes rotate{
