@@ -117,10 +117,18 @@
       <div class="modal-content">
         <p class="description" ng-bind-html="current_plan[0].info">
         </p>
-        <span ng-show="current_plan[0].delivery_charge">Delivery Charge : &#8377 {{current_plan[0].delivery_charge}}</span>
-        <div class="input-container delivery only-sm" ng-show="current_plan[0].delivery_charge">
-          <input type="checkbox" checked ng-model="delivery"/>
-          <span>Delivery</span>
+        <span ng-show="current_plan[0].delivery_charge" class="sm-hidden">Delivery Charge : &#8377 {{current_plan[0].delivery_charge}}</span>
+        <div class="place_order only-sm">
+          <div class="input-container delivery" ng-show="current_plan[0].delivery_charge">
+            <input type="checkbox" checked ng-model="delivery"/>
+            <span>Delivery (&#8377 {{current_plan[0].delivery_charge}})</span>
+          </div>
+          <div class="input-container qty" ng-init="qty=1">
+            <span>Quantity :</span>
+            <input type="number" max="5" ng-model="qty" min="1" disabled required placeholder="Enter Qty" />
+            <i class="fa fa-plus-circle" ng-click="qty= qty==5?qty:qty+1" aria-hidden="true"></i>
+            <i class="fa fa-minus-circle" ng-click="qty= qty==1?qty:qty-1" aria-hidden="true"></i>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -135,7 +143,7 @@
             <input type="checkbox" checked ng-model="delivery"/>
             <span>Delivery</span>
           </div>
-          <div class="input-container qty " ng-init="qty=1">
+          <div class="input-container qty sm-hidden" ng-init="qty=1">
             <span>Quantity :</span>
             <input type="number" max="5" ng-model="qty" min="1" disabled required placeholder="Enter Qty" />
             <i class="fa fa-plus-circle" ng-click="qty= qty==5?qty:qty+1" aria-hidden="true"></i>
@@ -165,10 +173,9 @@
           <h4>
             <img src="img/{{current_plan[0].p_name}}.png" width="100"/>
            {{current_plan[0].p_name}}</br>
-           <small>(<span ng-repeat="i in current_plan[0].meal_type track by $index" ng-if="isArray(current_plan[0].meal_type)">{{i}} {{$last ? '' : ', '}}</span><span ng-if="!isArray(current_plan[0].meal_type)">{{current_plan[0].meal_type}}</span>)</small>
          </h4>
-         <span class="qty">Quantity<br />{{qty}}</span>
-         <span class="final_price sm-hidden">Price<br />&#8377 {{final_order_price}}</span>
+         <span class="qty">Quantity : {{qty}}</span>
+         <span class="final_price">Price : &#8377 {{final_order_price}}</span>
         </div>
         <form id="addressForm">
           <div class="address">

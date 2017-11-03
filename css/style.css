@@ -142,6 +142,61 @@ input:focus,textarea:focus
   {
     flex-direction: column!important;
   }
+  .modal-container .order_modal .modal-content .order h4
+  {
+    margin: 0!important;
+  }
+  .modal-container .order_modal .modal-content .order .qty
+  {
+    margin-left: 18%!important;
+  }
+  .modal-container .order_modal .modal-content .order .final_price
+  {
+    margin-left: 22%;
+  }
+  .plan-modal .modal-content .qty
+  {
+    display:inline-flex;
+    align-items:center;
+    color:#000;
+    margin:0;
+  }
+  .plan-modal .modal-content .qty span
+  {
+    margin-right:3%;
+    width: auto;
+  }
+  .plan-modal .modal-content .qty input
+  {
+    width:30px!important;
+    margin-right: 4%;
+    height: 25px;
+  }
+  .plan-modal .modal-content .qty i
+  {
+    color:purple;
+    font-size:1.2em;
+  }
+  .plan-modal .modal-content .delivery
+  {
+    display:inline-flex;
+    align-items:center;
+    color:#000;
+    width:38%;
+    margin:0;
+  }
+  .plan-modal .modal-content .place_order
+  {
+    display: flex;
+      align-items: center;
+      justify-content: space-between;
+  }
+  .plan-modal .modal-content .delivery span
+  {
+    width: auto;
+    margin-left:2%;
+  }
+
 }
 @keyframes rotate{
   0%{
@@ -903,14 +958,16 @@ nav .top-menu-container
 }
 .order_modal .modal-content .order
 {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #ddd;
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2%;
+    border-bottom: 1px solid #ddd;
 }
 .order_modal .modal-content .order h4
 {
   display: flex;
+  margin: 0;
   align-items: center;
 }
 .order_modal .modal-content .order h4 img
