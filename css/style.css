@@ -38,6 +38,9 @@ input:focus,textarea:focus
   {
     position: absolute!important;
   }
+  .input-container span {
+    width: 123px!important;
+  }
   nav .icon {
     width: 44%!important;
     height: 89%!important;
