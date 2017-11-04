@@ -121,7 +121,7 @@
         <div class="place_order only-sm">
           <div class="input-container delivery" ng-show="current_plan[0].delivery_charge">
             <input type="checkbox" checked ng-model="delivery"/>
-            <span>Delivery (&#8377 {{current_plan[0].delivery_charge}})</span>
+            <span>Delivery <br />(&#8377 {{current_plan[0].delivery_charge}})</span>
           </div>
           <div class="input-container qty" ng-init="qty=1">
             <span>Quantity :</span>
@@ -250,6 +250,30 @@
   </div>
   <nav>
     <img class="icon" src="img/logo.png" />
+    <div class="top-menu-container only-sm">
+      <ul>
+        <li class="account" ng-click="activeModal='login'" ng-show="loggedIn==0">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+          Login
+        </li>
+        <li class="account" ng-click="userMenu=!userMenu" ng-show="loggedIn==1">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          {{currentUser.user.username}}
+          <div class="account-menu" ng-show="userMenu">
+            <div class="menu">
+              <div class="menu-item">
+                My Orders
+              </div>
+              <div class="menu-item" ng-click="logout()">
+                Logout
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+
     <div class="top-menu-container sm-hidden">
       <ul>
         <li id="about_btn" ng-click="scroll_to('about')">
@@ -325,19 +349,19 @@
     </div>
     <div class="content">
       <div class="container">
-        <img src="img/how1.jpg" />
+        <img src="img/how1.png" />
         <span>Visit Nutrimeals <br />App/Website</span>
       </div>
       <div class="container">
-        <img src="img/how2.jpg" />
+        <img src="img/how2.png" />
         <span>Choose a Dish/Plan</span>
       </div>
       <div class="container">
-        <img src="img/how3.jpg" />
+        <img src="img/how3.png" />
         <span>Chef's cook</span>
       </div>
       <div class="container">
-        <img src="img/how4.jpg" />
+        <img src="img/how4.png" />
         <span>We Deliver !</span>
       </div>
     </div>
@@ -382,7 +406,7 @@
     <div class="content">
       <div class="card">
         <div class="card-container card1">
-          <img src="img/variety.png" width="200" height="140" />
+          <img src="img/variety.png" height="140" />
           <div class="card-content">
             <h2>Wide Variety</h2>
             <p>
@@ -391,7 +415,7 @@
           </div>
         </div>
         <div class="card-container card2">
-          <img src="img/oil.png" width="180" height="140"/>
+          <img src="img/oil.png"  height="140"/>
           <div class="card-content content2">
             <h2>Finger Licking Taste</h2>
             <p>
@@ -400,7 +424,7 @@
           </div>
         </div>
         <div class="card-container card3">
-          <img src="img/delivery.png" width="150" height="140" />
+          <img src="img/delivery.png"  height="140" />
           <div class="card-content content3">
             <h2>Hygienic and professional</h2>
             <p>
@@ -409,7 +433,7 @@
           </div>
         </div>
         <div class="card-container card4">
-          <img src="img/refund.png" width="160" height="140"/>
+          <img src="img/refund.png"  height="140"/>
           <div class="card-content content4">
             <h2>Easy Ordering and Cancelling</h2>
             <p>
