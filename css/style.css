@@ -37,6 +37,7 @@ input:focus,textarea:focus
   .modal-container
   {
     position: absolute!important;
+    height: auto!important;
   }
   .input-container span {
     width: 123px!important;
