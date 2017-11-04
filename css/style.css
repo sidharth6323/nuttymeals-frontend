@@ -37,9 +37,9 @@ input:focus,textarea:focus
   .modal-container
   {
     position: absolute!important;
-    height: auto!important;
+    height: 120vh!important;
   }
-  .input-container span {
+  .order_modal .input-container span {
     width: 123px!important;
   }
   nav .icon {
