@@ -18,11 +18,13 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
   <script type="text/javascript" src="js/angular-simple-logger.js"></script>
   <script src="js/angular-google-maps.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
   <script src="js/scripts.js"></script>
 </head>
 <script>
-  $(document).ready(function() {
-      $('#loading').fadeOut(3000);
+
+  $('.section1').imagesLoaded( { background: true }, function() {
+    $('.loader-container').fadeOut(3000);
   });
 </script>
 <body ng-app="nuttymeals" ng-controller="mainCtrl" ng-init="initApp()">
