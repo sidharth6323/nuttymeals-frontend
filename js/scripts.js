@@ -13,8 +13,8 @@ app.config(function($sceDelegateProvider) {
 app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
-  $scope.api_domain = "https://nuttymeals.pythonanywhere.com";
-  //$scope.api_domain = "http://localhost:8000"
+  //$scope.api_domain = "https://nuttymeals.pythonanywhere.com";
+  $scope.api_domain = "http://localhost:8000"
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
@@ -195,7 +195,7 @@ app.controller("mainCtrl",function($scope,$http){
       $('html, body').animate({
           scrollTop: $("#"+section).offset().top-100
       }, 800);
-  
+
   }
   $scope.select_plan=function(id){
     $scope.plan_modal=1;

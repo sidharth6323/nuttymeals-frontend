@@ -234,7 +234,7 @@
             <td colspan="3"><input name="curl"  size="64" value="http://localhost:8081/"/></td>
             </tr>
             <tr>
-            <td colspan="3"><input type="hidden" name="service_provider" value="" /></td>
+            <td colspan="3"><input type="hidden" name="service_provider" value="payu_paisa" /></td>
             </tr>
           </table>
           <input type="submit" value="Submit"  />
@@ -249,75 +249,86 @@
     </div>
   </div>
   <nav>
-    <img class="icon" src="img/logo.png" />
-    <div class="top-menu-container only-sm">
-      <ul>
-        <li class="account" ng-click="activeModal='login'" ng-show="loggedIn==0">
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
-          Login
-        </li>
-        <li class="account" ng-click="userMenu=!userMenu" ng-show="loggedIn==1">
-          <i class="fa fa-user" aria-hidden="true"></i>
-          {{currentUser.user.username}}
-          <div class="account-menu" ng-show="userMenu">
-            <div class="menu">
-              <div class="menu-item">
-                My Orders
-              </div>
-              <div class="menu-item" ng-click="logout()">
-                Logout
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-
-    <div class="top-menu-container sm-hidden">
-      <ul>
-        <li id="about_btn" ng-click="scroll_to('about')">
-          About
-        </li>
-        <li id="how_btn" ng-click="scroll_to('how')">
-          How it Works?
-        </li>
-        <li id="why_btn" ng-click="scroll_to('why')">
-          Why Us?
-        </li>
-        <li id="faq_btn" ng-click="scroll_to('faq')">
-          FAQ's
-        </li>
-        <li id="contact_btn" ng-click="scroll_to('contact')">
-          Contact Us
-        </li>
-        <li>
-          NuttyBites
-        </li>
-        <li class="account" ng-click="activeModal='login'" ng-show="loggedIn==0">
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
-          Login
-        </li>
-        <li class="account" ng-click="userMenu=!userMenu" ng-show="loggedIn==1">
-          <i class="fa fa-user" aria-hidden="true"></i>
-          {{currentUser.user.username}}
-          <div class="account-menu" ng-show="userMenu">
-            <div class="menu">
-              <div class="menu-item">
-                My Orders
-              </div>
-              <div class="menu-item" ng-click="logout()">
-                Logout
+    <div class="content-wrapper navbar-content">
+      <img class="icon" src="img/logo.png" />
+      <div class="top-menu-container only-sm">
+        <ul>
+          <li class="account" ng-click="activeModal='login'" ng-show="loggedIn==0">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Login
+          </li>
+          <li class="account" ng-click="userMenu=!userMenu" ng-show="loggedIn==1">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            {{currentUser.user.username}}
+            <div class="account-menu" ng-show="userMenu">
+              <div class="menu">
+                <div class="menu-item">
+                  My Orders
+                </div>
+                <div class="menu-item" ng-click="logout()">
+                  Logout
+                </div>
               </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="top-menu-container sm-hidden">
+        <ul>
+          <li id="about_btn" ng-click="scroll_to('about')">
+            About
+          </li>
+          <li id="how_btn" ng-click="scroll_to('how')">
+            How it Works?
+          </li>
+          <li id="why_btn" ng-click="scroll_to('why')">
+            Why Us?
+          </li>
+          <li id="faq_btn" ng-click="scroll_to('faq')">
+            FAQ's
+          </li>
+          <li id="contact_btn" ng-click="scroll_to('contact')">
+            Contact Us
+          </li>
+          <li>
+            NuttyBites
+          </li>
+          <li class="account" ng-click="activeModal='login'" ng-show="loggedIn==0">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Login
+          </li>
+          <li class="account" ng-click="userMenu=!userMenu" ng-show="loggedIn==1">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            {{currentUser.user.username}}
+            <div class="account-menu" ng-show="userMenu">
+              <div class="menu">
+                <div class="menu-item">
+                  My Orders
+                </div>
+                <div class="menu-item" ng-click="logout()">
+                  Logout
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
+
   </nav>
   <div class="section1">
     <div class="content">
-      <div class="content-container">
+      <div class="section1-content">
+        <h1>Amazing Lip Smacking Food<br />Delivered at your Doorsteps</h1>
+        <p>
+          NuttyMeals delivers everything you need to bring more delicious meals and moments to the table. Every day.
+        </p>
+        <div class="boxinput-container menu" ng-click="scroll_to('plan')" id="plan_btn">
+          <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+          <input type="button" value="Explore Plans" />
+        </div>
+      </div>
+      <!--<div class="content-container">
         <div class="video-container sm-hidden" ng-click="load_video()">
           <i class="fa fa-play-circle" aria-hidden="true"></i>
           <img src="img/video-start.png" width="500"/>
@@ -340,7 +351,7 @@
             <input type="button" value="Signup" ng-click="activeModal='signup'" />
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
   <div class="section2" id="how">
@@ -367,10 +378,21 @@
     </div>
   </div>
   <div class="section3" id="about">
-    <h1>About Us</h1>
-    <p>
-      People not getting adequate food throughout the day according to their taste and wishes is an issue to think over. NuttyMeals sort this problem out by delivering delicious and hygienic food to you at the best prices. We assure about best services and quality. Our authenticity will bring you to us time and again. Pocket friendly rates in exchange of a qualitative presentation is what we term ourselves as. For all you office people out there, we have a delightful offer especially for you.Visit us and place your eyes on our menu to get through the same.<br /><span> We are happy to serve as per your expectations so do visit us for sure !</span>
-    </p>
+    <div class="about-img">
+      <img src="img/about.png" />
+    </div>
+    <div class="about-content">
+      <h1>About Us</h1>
+      <p>
+              In this fast paced life, it’s rare to get proper food which meets our calorific intake.
+        We at nutty meals saw this as a challenge and overcame with an efficient and
+        user friendly solution. We provide you with some of the best finger licking food
+        guaranteed with utmost level of hygiene and quality spices. We are completely
+        transparent with you and we can assure that our authenticity will drag you back
+        to us time and again. Pocket friendly rates in exchange of a qualitative
+        presentation is what we term ourselves as.<br /><span> Rest assured we will satisfy every taste bud of yours. !</span>
+      </p>
+    </div>
   </div>
   <div class="section4" id="plan">
     <div class="header">
@@ -404,129 +426,75 @@
       <h1>Why Us ?</h1>
     </div>
     <div class="content">
-      <div class="card">
-        <div class="card-container card1">
-          <img src="img/variety.png" height="140" />
-          <div class="card-content">
-            <h2>Wide Variety</h2>
-            <p>
-              None of the Dishes are repeated for 2 weeks.
-            </p>
-          </div>
+      <div class="text-content">
+        <div class="why">
+          <img src="img/why1.png" />
+          <h4>Wide Variety : <span> Pinky Swear, the dishes won’t be repeated for two weeks. Say
+            goodbye to monotonous food.</span></h4>
         </div>
-        <div class="card-container card2">
-          <img src="img/oil.png"  height="140"/>
-          <div class="card-content content2">
-            <h2>Finger Licking Taste</h2>
-            <p>
-              Adequate amount of Oil/spices to produce quality home made food.
-            </p>
-          </div>
+        <div class="why">
+          <img src="img/why2.png" />
+          <h4>Quality Food :<span> We maintain the highest standards of hygiene and
+            deliver the food in heat/warm compatible boxes.</span></h4>
         </div>
-        <div class="card-container card3">
-          <img src="img/delivery.png"  height="140" />
-          <div class="card-content content3">
-            <h2>Hygienic and professional</h2>
-            <p>
-              Delivery will be done in Clean, Hot and Hygienic Tiffin Boxes.
-            </p>
-          </div>
+        <div class="why">
+          <img src="img/why3.png" />
+          <h4>Easy Cancellation and Ordering : <span>With the option of
+            ordering/cancellation of food from both website and app we give you all the
+            flexibility.</span></h4>
         </div>
-        <div class="card-container card4">
-          <img src="img/refund.png"  height="140"/>
-          <div class="card-content content4">
-            <h2>Easy Ordering and Cancelling</h2>
-            <p>
-              Ordering and Cancelling takes minutes and hassle free refund.
-            </p>
-          </div>
-        </div>
+      </div>
+      <div class="image-content">
+        <img src="img/whyus.jpg" />
       </div>
     </div>
   </div>
-  <div class="section6" id="faq">
-    <div class="header">
-      <span>FAQ's</span>
-    </div>
+  <div class="section6" id="offer">
     <div class="content">
-      <div class="question">
-        <h5>- Why should you choose us?</h5>
-        <span>We work as per and for the customer. Serving you with the perfect blend of the mixtures and spices at the least possible cost is our forte.</span>
+      <img src="img/offer.png" />
+      <div class="offer">
+        <span><h4>Get 30% OFF</h4> on all orders above 150</span>
+        <small>*offer applicable upto Rs. 100 only for new users signed by referal</small>
       </div>
-      <div class="question">
-        <h5>- What are our operation timings?</h5>
-        <span>We serve breakfast from 7:30 am to 8:30 am
-              our lunch timings are from 12:30 pm to 1:30 pm
-              and, we serve dinner from 7:30 am to 8:30 pm
-        </span>
-      </div>
-      <div class="question">
-        <h5>- What is the price of our meals? Are there any special offers for office working people or certain deals? </h5>
-        <span>The full meal packages amount to Rs.3999 but can be reduced down to Rs.3799 for 30 days. And for 15 days, the amount is Rs.1999.
-          The office employees can opt for the breakfast and dinner combo meals which actually cost Rs.2999 but they can avail the early bird discount which will reduce the meal cost to Rs.1399.
-        </span>
-      </div>
-      <div class="question">
-        <h5>- What is the credibility of your visual gallery?</h5>
-        <span>We simply abide by the rule of actually serving what all we portray through images. All our pictures are taken while they are being prepared only with quality spices and ingredients. </span>
-      </div>
-      <div class="question">
-        <h5>- What are our areas of operation?</h5>
-        <span>Right now we revolve around places in and near Rajareshwari Nagar only. We will be expanding our wings to other places soon. </span>
-      </div>
-      <div class="question">
-        <h5>- Are there any delivery charges? </h5>
-        <span>No, we do not charge anything extra for the delivery.</span>
-      </div>
-      <div class="question">
-        <h5>- Will you abide by any changes as per the customer convenience? </h5>
-        <span>Yes. For example, if you cancel the meal, all you need to do is inform us 12 hours before. The amount of the cancelled meal will be forwarded to the next subscription period. If you wish t get the meal delivered at some other place, you should inform us atleast 3 hours before the delivery schedule.</span>
+      <div class="boxinput-container">
+        <input type="button" value="SIGN UP NOW"/>
       </div>
     </div>
   </div>
   <div class="section7" id="contact">
     <div class="header">
-      <span>Contact Us</span>
+      SO HEALTHY.<BR />
+      SO DELICIOUS.
     </div>
     <div class="content">
-      <form action="">
-        <div class="input-container">
-          <span>Email :</span>
-          <input type="email" required placeholder="Enter your email" />
-        </div>
-        <div class="input-container">
-          <span>Your message :</span>
-          <textarea rows="8" cols="42" placeholder="Enter your message" required></textarea>
-        </div>
-        <div class="input-container">
-          <input type="submit" value="Submit" />
-        </div>
-      </form>
-      <div class="social sm-hidden">
-        <span> Reach Us on:</span>
-        <div class="icon-container">
-          <i class="fa fa-facebook" aria-hidden="true"></i>
-          <i class="fa fa-twitter" aria-hidden="true"></i>
-          <i class="fa fa-linkedin" aria-hidden="true"></i>
-        </div>
+      <p>
+        Each week, our chefs create new dishes <br />inspired by seasonal flavors that will tempt, delight, and energize.
+      </p>
+      <div class="boxinput-container">
+        <input type="button" value="SEE TODAY'S MENU" />
       </div>
     </div>
   </div>
   <footer>
-    <div class="icon sm-hidden">
-      <img src="img/logo.png" width="200px" height="65px"/>
+    <div class="footer1">
+      <span>Have any queries? contact us @ nuttymeals01@gmail.com or call us on +91 85060 00091</span>
     </div>
-    <div class="buttons sm-hidden">
-      <p>About Us</p>
-      <p>How it Works?</p>
-      <p>Why Us?</p>
-      <p>FAQ's</p>
-      <p>Contact Us</p>
-    </div>
-    <div class="social">
-      <i class="fa fa-facebook" aria-hidden="true"></i>
-      <i class="fa fa-twitter" aria-hidden="true"></i>
-      <i class="fa fa-linkedin" aria-hidden="true"></i>
+    <div class="footer2">
+      <div class="icon sm-hidden">
+        <img src="img/logo.png" width="200px" height="65px"/>
+      </div>
+      <div class="buttons sm-hidden">
+        <p>About Us</p>
+        <p>How it Works?</p>
+        <p>Why Us?</p>
+        <p>FAQ's</p>
+        <p>Contact Us</p>
+      </div>
+      <div class="social">
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+        <i class="fa fa-linkedin" aria-hidden="true"></i>
+      </div>
     </div>
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
