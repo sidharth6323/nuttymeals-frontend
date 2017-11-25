@@ -19,6 +19,14 @@ a{
   border: none;
   text-decoration: none;
 }
+.loader-container
+{
+  display: none;
+  width: 30%;
+    margin: 12% auto;
+    display: flex;
+    align-items: center;
+}
 input:focus,textarea:focus
 {
   outline: none;
@@ -565,6 +573,11 @@ nav .top-menu-container
     align-items: center;
     margin-left: 40%;
     margin-top: 7%;
+    transition: all ease-in-out 0.15s;
+}
+.section1 .boxinput-container:hover
+{
+  background: #9e2723;
 }
 .section1 .boxinput-container input
 {
@@ -592,7 +605,11 @@ nav .top-menu-container
     margin-bottom: 2%;
     margin-top: 2%;
     font-family: 'brandon';
-    font-size: 1.3em!important;
+}
+.section2 .header span
+{
+  font-size: 1.5em!important;
+
 }
 .section2 .content
 {
@@ -845,6 +862,11 @@ nav .top-menu-container
     display: inline-flex!important;
     align-items: center;
     margin: 4% 0;
+    transition: all ease-in-out 0.15s;
+}
+.section6 .content .boxinput-container:hover
+{
+  background: #792d76;
 }
 .section6 .content .boxinput-container input
 {
@@ -898,12 +920,21 @@ nav .top-menu-container
     padding: 11px 52px;
     font-size: 1.7em;
     cursor: pointer;
-    background: #f2f2f2;
+    background: #88D20F;
     display: inline-flex!important;
     align-items: center;
     margin: 4% 0;
+    transition: all ease-in-out 0.15s;
 }
-
+.section7 .content .boxinput-container:hover
+{
+  background: #77af15;
+  color: black!important;
+}
+.section7 .content .boxinput-container input
+{
+  color: white;
+}
 
 .plan-modal
 {
@@ -1074,9 +1105,20 @@ footer{
   margin-top: 0%;
 
 }
+footer .footer2 .map
+{
+  width: 20%;
+  height: 157px;
+}
+footer .footer2 .map .map-container
+{
+  width: 100%;
+  height: 100%;
+}
+.angular-google-map-container { height: 157px; }
 footer .footer2
 {
-      padding: 2% 0;
+      padding: 2% 5%;
   background: #EFEFEF;
   display: flex;
   justify-content: space-around;
@@ -1107,7 +1149,6 @@ footer .footer2 .buttons
     border-right: 1px solid #add2dd;
     padding-right: 5%;
     color: #829da5;
-    margin-left: -23%;
     font-size: 0.85em;
     text-align: center;
     padding-left: 5%;

@@ -1,4 +1,4 @@
-var app = angular.module("nuttymeals",['ngAnimate','ngSanitize']);
+var app = angular.module("nuttymeals",['ngAnimate','ngSanitize','uiGmapgoogle-maps']);
 
 app.config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
@@ -9,7 +9,14 @@ app.config(function($sceDelegateProvider) {
     'https://secure.payu.in/_payment'
   ]);
 });
+app.config(function(uiGmapGoogleMapApiProvider){
 
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyDjwwUEE6Y4EOPfLn7ae9Oaau29bCTO8wk',
+    v: '3.28', //defaults to latest 3.X anyhow
+  });
+
+});
 app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
@@ -204,6 +211,29 @@ app.controller("mainCtrl",function($scope,$http){
       });
       console.log($scope.current_plan);
       $scope.set_delivery_status();
+  }
+
+  $scope.map = { center: { latitude: 12.9852886, longitude: 77.5959000 }, zoom: 19 };
+  $scope.marker = {
+    id: 0,
+    coords: {
+      latitude: 12.9852886,
+      longitude: 77.5959000
+    },
+    events: {
+      dragend: function (marker, eventName, args) {
+        $log.log('marker dragend');
+        var lat = marker.getPosition().lat();
+        var lon = marker.getPosition().lng();
+        $log.log(lat);
+        $log.log(lon);
+        $scope.marker1.options = {
+          labelContent: "lat: " + $scope.marker1.coords.latitude + ' ' + 'lon: ' + $scope.marker1.coords.longitude,
+          labelAnchor: "100 0",
+          labelClass: "marker-labels"
+        };
+      }
+    }
   }
 
 });
