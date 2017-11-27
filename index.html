@@ -22,7 +22,6 @@
   <script src="js/scripts.js"></script>
 </head>
 <script>
-
   $('.section1').imagesLoaded( { background: true }, function() {
     $('.loader-container').fadeOut(3000);
   });
@@ -31,7 +30,6 @@
   <div class="loader-container" id="loading">
     <div class="loader">
       <img src="img/loader.gif" width="200px"/>
-      <span>Loading . . .</span>
     </div>
   </div>
   <div class="modal-container" ng-show="activeModal=='login'">
@@ -114,6 +112,58 @@
     </div>
   </div>
 
+
+  <div class="modal-container" ng-show="activeModal=='my_orders_modal'">
+    <div class="modal my_orders_modal">
+      <div class="modal-header">
+        <h3>
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+         &nbsp My Orders</h3>
+         <i class="fa fa-times pull-right" aria-hidden="true" ng-click="activeModal=''"></i>
+      </div>
+      <div class="modal-content">
+        <div class="leftbar">
+          <i class="fa fa-user-circle-o dp" aria-hidden="true"></i>
+          <h2>
+            {{currentUser.user.username}}
+          </h2>
+          <span>{{currentUser.user.email}}</span>
+          <span>{{currentUser.phone}}</span>
+        </div>
+        <div class="main-order-container">
+          <div class="order" ng-repeat="order in my_orders | filter : {'status' : 'Placed/Subscribed'}">
+            <div class="order-content">
+              <div class="order_details">
+                <h3>{{order.plan.p_name}}</h3>
+                <small>Qty : {{order.qty}}</small>
+                <small>Placed on: {{order.created_at}}</small>
+                <small>{{order.address}}</small>
+              </div>
+              <div class="order_status">
+                {{order.status}}
+              </div>
+              <div class="order_amount">
+                {{order.amount}}
+              </div>
+            </div>
+            <div class="order-footer">
+              <span>Expires at : {{order.expires_at}}</span>
+              <div class="boxinput-container" ng-click="cancel_for_tomo(order.o_id)" ng-show="!order.cancelled_for_tomo">
+                <span>Cancel for Tomorrow</span>
+              </div>
+              <div class="boxinput-container disabled" ng-show="order.cancelled_for_tomo">
+                <span>Cancelled for tomo</span>
+              </div>
+              <!--<div class="boxinput-container">
+                <span>Cancel Order</span>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-container" ng-show="plan_modal">
     <div class="modal plan-modal">
       <div>
@@ -131,19 +181,86 @@
        </div>
       </div>
       <div class="modal-content">
-        <p class="description" ng-bind-html="current_plan[0].info">
-        </p>
-        <span ng-show="current_plan[0].delivery_charge" class="sm-hidden">Delivery Charge : &#8377 {{current_plan[0].delivery_charge}}</span>
-        <div class="place_order only-sm">
-          <div class="input-container delivery" ng-show="current_plan[0].delivery_charge">
-            <input type="checkbox" checked ng-model="delivery"/>
-            <span>Delivery <br />(&#8377 {{current_plan[0].delivery_charge}})</span>
+        <div class="leftbar">
+          <p class="description" ng-bind-html="current_plan[0].info"></p>
+          <span ng-show="current_plan[0].delivery_charge" class="sm-hidden">Delivery Charge : &#8377 {{current_plan[0].delivery_charge}}</span>
+          <div class="place_order only-sm">
+            <div class="input-container delivery" ng-show="current_plan[0].delivery_charge">
+              <input type="checkbox" checked ng-model="delivery"/>
+              <span>Delivery <br />(&#8377 {{current_plan[0].delivery_charge}})</span>
+            </div>
+            <div class="input-container qty" ng-init="qty=1">
+              <span>Quantity :</span>
+              <input type="number" max="5" ng-model="qty" min="1" disabled required placeholder="Enter Qty" />
+              <i class="fa fa-plus-circle" ng-click="qty= qty==5?qty:qty+1" aria-hidden="true"></i>
+              <i class="fa fa-minus-circle" ng-click="qty= qty==1?qty:qty-1" aria-hidden="true"></i>
+            </div>
           </div>
-          <div class="input-container qty" ng-init="qty=1">
-            <span>Quantity :</span>
-            <input type="number" max="5" ng-model="qty" min="1" disabled required placeholder="Enter Qty" />
-            <i class="fa fa-plus-circle" ng-click="qty= qty==5?qty:qty+1" aria-hidden="true"></i>
-            <i class="fa fa-minus-circle" ng-click="qty= qty==1?qty:qty-1" aria-hidden="true"></i>
+        </div>
+        <div class="rightbar">
+          <div class="meal_type">
+            <div class="input-container">
+              <input type="radio" name="meal_type"/>
+              <img src="img/veg.png" width="15"/>
+              <span>Veg</span>
+            </div>
+            <div class="input-container">
+              <input type="radio" name="meal_type"/>
+              <img src="img/non-veg.png" width="15"/>
+              <span>Non-Veg</span>
+            </div>
+          </div>
+          <div class="addon">
+            <div class="addon_btn" ng-click="show_addon=1" ng-show="!show_addon">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i>
+              <span>Add an Add-on (&#8377; 29)</span>
+            </div>
+            <div class="addon-item" ng-show="show_addon&& current_plan[0].meal_type.indexOf('Lunch')!=-1">
+              <h4>Lunch (each for &#8377; 29)</h4>
+              <div class="item-container">
+                <div class="item">
+                  <span>Add Chapati(4 nos.)</span>
+                  <input type="number" max="5" ng-model="addon_lunch_chapati" min="1" disabled required placeholder="Enter Qty" />
+                  <i class="fa fa-plus-circle" ng-click="addon_lunch_chapati= addon_lunch_chapati==5?addon_lunch_chapati:addon_lunch_chapati+1" aria-hidden="true"></i>
+                  <i class="fa fa-minus-circle" ng-click="addon_lunch_chapati= addon_lunch_chapati==0?addon_lunch_chapati:addon_lunch_chapati-1" aria-hidden="true"></i>
+                </div>
+                <div class="item">
+                  <span>Add Rice</span>
+                  <input type="number" max="5" ng-model="addon_lunch_rice" min="1" disabled required placeholder="Enter Qty" />
+                  <i class="fa fa-plus-circle" ng-click="addon_lunch_rice= addon_lunch_rice==5?addon_lunch_rice:addon_lunch_rice+1" aria-hidden="true"></i>
+                  <i class="fa fa-minus-circle" ng-click="addon_lunch_rice= addon_lunch_rice==0?addon_lunch_rice:addon_lunch_rice-1" aria-hidden="true"></i>
+                </div>
+                <div class="item">
+                  <span>Add Curry</span>
+                  <input type="number" max="5" ng-model="addon_lunch_curry" min="1" disabled required placeholder="Enter Qty" />
+                  <i class="fa fa-plus-circle" ng-click="addon_lunch_curry= addon_lunch_curry==5?addon_lunch_curry:addon_lunch_curry+1" aria-hidden="true"></i>
+                  <i class="fa fa-minus-circle" ng-click="addon_lunch_curry= addon_lunch_curry==0?addon_lunch_curry:addon_lunch_curry-1" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+            <div class="addon-item" ng-show="show_addon && current_plan[0].meal_type.indexOf('Dinner')!=-1">
+              <h4>Dinner (each for &#8377; 29)</h4>
+              <div class="item-container">
+                <div class="item">
+                  <span>Add Chapati(4 nos.)</span>
+                  <input type="number" max="5" ng-model="addon_dinner_chapati" min="1" disabled required placeholder="Enter Qty" />
+                  <i class="fa fa-plus-circle" ng-click="addon_dinner_chapati= addon_dinner_chapati==5?addon_dinner_chapati:addon_dinner_chapati+1" aria-hidden="true"></i>
+                  <i class="fa fa-minus-circle" ng-click="addon_dinner_chapati= addon_dinner_chapati==0?addon_dinner_chapati:addon_dinner_chapati-1" aria-hidden="true"></i>
+                </div>
+                <div class="item">
+                  <span>Add Rice</span>
+                  <input type="number" max="5" ng-model="addon_dinner_rice" min="1" disabled required placeholder="Enter Qty" />
+                  <i class="fa fa-plus-circle" ng-click="addon_dinner_rice= addon_dinner_rice==5?addon_dinner_rice:addon_dinner_rice+1" aria-hidden="true"></i>
+                  <i class="fa fa-minus-circle" ng-click="addon_dinner_rice= addon_dinner_rice==0?addon_dinner_rice:addon_dinner_rice-1" aria-hidden="true"></i>
+                </div>
+                <div class="item">
+                  <span>Add Curry</span>
+                  <input type="number" max="5" ng-model="addon_dinner_curry" min="1" disabled required placeholder="Enter Qty" />
+                  <i class="fa fa-plus-circle" ng-click="addon_dinner_curry= addon_dinner_curry==5?addon_dinner_curry:addon_dinner_curry+1" aria-hidden="true"></i>
+                  <i class="fa fa-minus-circle" ng-click="addon_dinner_curry= addon_dinner_curry==0?addon_dinner_curry:addon_dinner_curry-1" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -177,7 +294,7 @@
   <div class="modal-container" ng-show="activeModal=='place_order'">
     <div class="modal  order_modal">
       <div class="modal-header">
-        <i class="fa fa-chevron-left pull-left back_btn" aria-hidden="true" ng-click="activeModal='';plan_modal=1;"></i>
+        <i class="fa fa-chevron-left pull-left back_btn" aria-hidden="true" ng-click="activeModal='';plan_modal=1;show_addon=0"></i>
         <h3>
           <i class="fa fa-sign-in" aria-hidden="true" ng-show="!loginLoading"></i>
          &nbsp Place Order</h3>
@@ -250,7 +367,7 @@
             <td colspan="3"><input name="curl"  size="64" value="http://localhost:8081/"/></td>
             </tr>
             <tr>
-            <td colspan="3"><input type="hidden" name="service_provider" value="payu_paisa" /></td>
+            <td colspan="3"><input type="hidden" name="service_provider" value="" /></td>
             </tr>
           </table>
           <input type="submit" value="Submit"  />
@@ -278,7 +395,7 @@
             {{currentUser.user.username}}
             <div class="account-menu" ng-show="userMenu">
               <div class="menu">
-                <div class="menu-item">
+                <div class="menu-item" ng-click="activeModal='my_orders_modal';get_my_orders()">
                   My Orders
                 </div>
                 <div class="menu-item" ng-click="logout()">
@@ -315,7 +432,7 @@
             {{currentUser.user.username}}
             <div class="account-menu" ng-show="userMenu">
               <div class="menu">
-                <div class="menu-item">
+                <div class="menu-item" ng-click="activeModal='my_orders_modal';get_my_orders()">
                   My Orders
                 </div>
                 <div class="menu-item" ng-click="logout()">

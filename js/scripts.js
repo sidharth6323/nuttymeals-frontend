@@ -25,6 +25,7 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
+  $scope.show_addon=0;
   $scope.time="monthly";
   $scope.isArray = function(input) {
       return angular.isArray(input);
@@ -88,7 +89,7 @@ app.controller("mainCtrl",function($scope,$http){
       $http({
         method:"POST",
         url : $scope.api_domain + "/api/get/payu_hash",
-        data : {email:$scope.currentUser.user.email,amount:$scope.final_order_price,product_info:$scope.current_plan[0].p_name,firstname:$scope.currentUser.user.username,udf1:$scope.address1+", "+$scope.address2+", "+$scope.pincode,udf2:$scope.qty,udf3:$scope.delivery},
+        data : {email:$scope.currentUser.user.email,amount:$scope.final_order_price,product_info:$scope.current_plan[0].p_name,firstname:$scope.currentUser.user.username,udf1:$scope.address1+", "+$scope.address2+", "+$scope.pincode,udf2:$scope.qty,udf3:$scope.delivery,addons:$scope.addons},
         headers: {'Authorization': "Token "+session}
       }).then(function(response){
         console.log(response.data);
@@ -116,10 +117,41 @@ app.controller("mainCtrl",function($scope,$http){
     else {
       $scope.final_order_price = $scope.qty*$scope.current_plan[0].price;
     }
+    if($scope.addon_lunch_chapati!=0 || $scope.addon_lunch_curry!=0 || $scope.addon_lunch_rice!=0 || $scope.addon_dinner_chapati!=0 || $scope.addon_dinner_curry!=0 || $scope.addon_dinner_rice!=0)
+    {
+      console.log("addon changed");
+      $scope.addons = {"lunch":{"chapati":$scope.addon_lunch_chapati,"curry":$scope.addon_lunch_curry,"rice":$scope.addon_lunch_rice},"dinner":{"chapati":$scope.addon_dinner_chapati,"curry":$scope.addon_dinner_curry,"rice":$scope.addon_dinner_rice}}
+      sum = $scope.addon_lunch_chapati + $scope.addon_lunch_curry + $scope.addon_lunch_rice + $scope.addon_dinner_chapati + $scope.addon_dinner_curry + $scope.addon_dinner_rice;
+      $scope.final_order_price = $scope.final_order_price + (sum*29);
+    }
+
   }
 
-
-
+  $scope.get_my_orders= function(){
+    var session = getCookie('s_id');
+    $http({
+      method:"GET",
+      url : $scope.api_domain + "/api/get/orders/",
+      headers: {'Authorization': "Token "+session}
+    }).then(function(response){
+      $scope.my_orders=response.data;
+      console.log($scope.my_orders)
+    },function(){
+      console.log("didn't get orders");
+    });
+  }
+  $scope.cancel_for_tomo = function(o_id){
+    var session = getCookie('s_id');
+    $http({
+      method:"GET",
+      url : $scope.api_domain + "/api/get/order/cancel_for_tomo/"+o_id+"/",
+      headers: {'Authorization': "Token "+session}
+    }).then(function(response){
+      $scope.get_my_orders();
+    },function(){
+      console.log("didn't cancel");
+    });
+  }
   $scope.getPlans = function(){
     $http({
       method:"GET",
@@ -206,6 +238,13 @@ app.controller("mainCtrl",function($scope,$http){
   }
   $scope.select_plan=function(id){
     $scope.plan_modal=1;
+    $scope.show_addon=0;
+    $scope.addon_lunch_curry = 0;
+    $scope.addon_lunch_chapati = 0;
+    $scope.addon_lunch_rice = 0;
+    $scope.addon_dinner_curry = 0;
+    $scope.addon_dinner_chapati = 0;
+    $scope.addon_dinner_rice = 0;
       $scope.current_plan = $scope.allPlans.filter(function( obj ) {
         return obj.id == id;
       });
