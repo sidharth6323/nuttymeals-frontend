@@ -33,7 +33,7 @@ a{
     width: 16%;
     margin: 9% auto;
   }
-  
+
 input:focus,textarea:focus
 {
   outline: none;
@@ -72,6 +72,10 @@ input:focus,textarea:focus
   nav .icon {
     width: 44%!important;
     height: 89%!important;
+  }
+  .plan-modal .modal-content
+  {
+    flex-direction:  column;
   }
 
   .section1 .content-container .text-container {
