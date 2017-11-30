@@ -1532,4 +1532,13 @@ footer .footer2 .social i
     width: 68%;
     margin: 30% auto;
   }
+  .section8
+  {
+    padding: 20% 0 2%!important;
+    margin-bottom: 15%;
+  }
+  .section8 .card .card-footer
+  {
+    margin-top: 24%;
+  }
 }
