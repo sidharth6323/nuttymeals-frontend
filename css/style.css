@@ -160,6 +160,10 @@ input:focus,textarea:focus
     margin-left: 14%!important;
     width: 211%!important;
   }
+  .plan-modal .leftbar
+  {
+    border: none!important;
+  }
   .plan-modal .modal-content p
   {
     text-align: center!important;
@@ -1540,5 +1544,9 @@ footer .footer2 .social i
   .section8 .card .card-footer
   {
     margin-top: 24%;
+  }
+  .plan-modal .modal-content .rightbar .addon .addon_btn
+  {
+    margin: 5% auto!important;
   }
 }
