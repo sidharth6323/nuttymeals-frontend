@@ -254,6 +254,19 @@ input:focus,textarea:focus
   {
     width: 90%!important;
   }
+  .my_orders_modal .modal-content {
+    flex-direction: column;
+  }
+  .my_orders_modal .leftbar {
+    width: 100%!important;
+  }
+  .my_orders_modal .main-order-container {
+    width: 100%!important;
+    font-size: 0.7em!important;
+  }
+  .my_orders_modal .main-order-container .order .order-content .order_details{
+    width: 44%!important;
+  }
 }
 @keyframes rotate{
   0%{
