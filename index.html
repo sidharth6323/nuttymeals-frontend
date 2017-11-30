@@ -22,10 +22,14 @@
 </head>
 <script>
   $('.section1').imagesLoaded( { background: true }, function() {
-    $('.loader-container').fadeOut(3000);
+    $('.loader-container').fadeOut(1000);
   });
 </script>
 <body ng-app="nuttymeals" ng-controller="mainCtrl" ng-init="initApp()">
+  <div class="font_preload" style="opacity: 0">
+    <span style="font-family: 'brandon', Arial, sans-serif;"></span>
+    <span style="font-family: 'golden', Arial, sans-serif;"></span>
+  </div>
   <div class="loader-container" id="loading">
     <div class="loader">
       <img src="img/loader.gif" width="200px"/>

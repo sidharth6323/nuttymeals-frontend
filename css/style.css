@@ -291,6 +291,7 @@ nav .navbar-content{
   font-size: 1em;
   text-transform: uppercase;
   justify-content: space-between;
+  width: 100%;
 }
 .modal{
   width: 30%;
@@ -986,7 +987,7 @@ nav .top-menu-container
   position: absolute;
   top:0;
   transition: all ease-in-out 0.5s;
-  
+
 }
 .section8 .card .card-content
 {
