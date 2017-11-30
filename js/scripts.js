@@ -20,6 +20,7 @@ app.config(function(uiGmapGoogleMapApiProvider){
 app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
+  $scope.active_review=1;
   $scope.api_domain = "https://nuttymeals.pythonanywhere.com";
   //$scope.api_domain = "http://localhost:8000"
   $scope.loggedIn=0;
@@ -51,6 +52,16 @@ app.controller("mainCtrl",function($scope,$http){
     }
     return "";
   }
+  setInterval(function(){
+    if($scope.active_review<3)
+    {
+      $scope.active_review = $scope.active_review + 1;
+    }
+    else {
+      $scope.active_review=1;
+    }
+    $scope.$apply();
+  },3000);
   $scope.load_video = function(){
     if(!$scope.video_played)
     {
@@ -109,14 +120,15 @@ app.controller("mainCtrl",function($scope,$http){
   }
 
   $scope.place_order = function(){
-    $scope.final_order_price=0;
-    $scope.activeModal='place_order';
-    $scope.plan_modal=0;
     if($scope.meal_type.length==0)
     {
       alert("Please select Veg or Non-Veg meal type!");
       return;
     }
+    $scope.final_order_price=0;
+    $scope.activeModal='place_order';
+    $scope.plan_modal=0;
+
     if($scope.delivery==true)
     {
       $scope.final_order_price = $scope.current_plan[0].delivery_charge + ($scope.qty*$scope.current_plan[0].price);
@@ -260,12 +272,12 @@ app.controller("mainCtrl",function($scope,$http){
       $scope.set_delivery_status();
   }
 
-  $scope.map = { center: { latitude: 12.9852886, longitude: 77.5959000 }, zoom: 19 };
+  $scope.map = { center: { latitude: 12.9020326, longitude: 77.5202511 }, zoom: 19 };
   $scope.marker = {
     id: 0,
     coords: {
-      latitude: 12.9852886,
-      longitude: 77.5959000
+      latitude: 12.9020326,
+      longitude: 77.5202511
     },
     events: {
       dragend: function (marker, eventName, args) {

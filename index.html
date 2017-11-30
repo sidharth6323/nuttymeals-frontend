@@ -1,12 +1,11 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
   <title>Nutty Meals</title>
   <meta name="description" content="NuttyMeals">
-  <meta name="author" content="SitePoint">
+  <meta name="author" content="NuttyMeals">
+  <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:30|Hind+Madurai" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -579,6 +578,51 @@
       </p>
       <div class="boxinput-container">
         <input type="button" value="SEE TODAY'S MENU" />
+      </div>
+    </div>
+  </div>
+  <div class="section8" id="testimonials">
+    <div class="content">
+      <div class="card" ng-show="active_review==1">
+        <div class="card-content">
+          <i class="fa fa-chevron-left sm-hidden" aria-hidden="true" ng-click="active_review=3"></i>
+          <p>
+            " Nutty meals provided me with delicious food <br />with an awesome price tag, would love to order again. "
+          </p>
+          <i class="fa fa-chevron-right sm-hidden" aria-hidden="true" ng-click="active_review=2"></i>
+        </div>
+        <div class="card-footer">
+          <span>Sidharth Kumar,</span> CEO, bohot badi company
+        </div>
+      </div>
+      <div class="card" ng-show="active_review==2">
+        <div class="card-content">
+          <i class="fa fa-chevron-left sm-hidden" aria-hidden="true" ng-click="active_review=1"></i>
+          <p>
+            " Loved the gajar ka halwa. Maa ki yaad aa Gayi "
+          </p>
+          <i class="fa fa-chevron-right sm-hidden" aria-hidden="true" ng-click="active_review=3"></i>
+        </div>
+        <div class="card-footer">
+          <span>Sidharth Kumar,</span> CEO, bohot badi company
+        </div>
+      </div>
+      <div class="card" ng-show="active_review==3">
+        <div class="card-content">
+          <i class="fa fa-chevron-left sm-hidden" aria-hidden="true" ng-click="active_review=2"></i>
+          <p>
+            " Food satisfaction never got better, Nutty meals is amazing "
+          </p>
+          <i class="fa fa-chevron-right sm-hidden" aria-hidden="true" ng-click="active_review=1"></i>
+        </div>
+        <div class="card-footer">
+          <span>Sidharth Kumar,</span> CEO, bohot badi company
+        </div>
+      </div>
+      <div class="dots">
+        <span class="dot active" ng-class="{'active':active_review==1}"></span>
+        <span class="dot" ng-class="{'active':active_review==2}"></span>
+        <span class="dot" ng-class="{'active':active_review==3}"></span>
       </div>
     </div>
   </div>

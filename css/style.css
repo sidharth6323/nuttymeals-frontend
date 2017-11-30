@@ -960,6 +960,78 @@ nav .top-menu-container
   color: white;
 }
 
+.section8
+{
+  width: 100%;
+  padding: 0% 0 2%;
+  font-family: 'brandon';
+}
+.section8 .content
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.section8 .content i
+{
+  color: #d8d8d8;
+  margin-top: 5%;
+}
+.section8 .card
+{
+  width: 80%;
+  text-align: center;
+  position: absolute;
+  top:0;
+  transition: all ease-in-out 0.5s;
+  
+}
+.section8 .card .card-content
+{
+  font-size: 1.8em;
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4%;
+    height: 4em;
+}
+.section8 .card.ng-hide
+{
+  opacity: 0;
+  transition: all ease-in-out 0.5s;
+}
+.section8 .card .card-footer
+{
+  font-size: 1.2em;
+    font-style: italic;
+}
+.section8 .card .card-footer span
+{
+  font-style: normal;
+}
+.section8 .dots
+{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+    top: 10em;
+    margin-bottom: 8%;
+}
+.section8 .dot
+{
+  border: 4px solid #d8d8d8;
+    margin: 6% 2%;
+    border-radius: 50%;
+    transition: all ease-in-out 0.5s;
+}
+.section8 .dot.active
+{
+  border: 6px solid #888;
+}
 .plan-modal
 {
   width: 60%!important;
