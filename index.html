@@ -84,6 +84,9 @@
          <i class="fa fa-times pull-right" aria-hidden="true" ng-click="activeModal=''"></i>
       </div>
       <div class="modal-content">
+        <div class="form-error" ng-show="signupError">
+          <span>{{signupError}}</span>
+        </div>
         <form class="loginForm" ng-submit="signup()">
           <div class="input-container">
             <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -97,13 +100,14 @@
             <i class="fa fa-key" aria-hidden="true"></i>
             <input type="password" required ng-model="password" placeholder="Enter your Password" />
           </div>
-          <div class="input-container">
+          <div class="input-container phone">
             <i class="fa fa-phone" aria-hidden="true"></i>
+            <span>+91</span>
             <input type="number" required ng-model="phone" placeholder="Enter your Phone No." />
           </div>
           <div class="input-container">
             <i class="fa fa-user" aria-hidden="true"></i>
-            <input type="text" required ng-model="referral" placeholder="Enter Referral Code (Optional)" />
+            <input type="text" ng-model="referral" placeholder="Enter Referral Code (Optional)" />
           </div>
           <div class="input-container">
             <input type="submit" value="SIGNUP" />

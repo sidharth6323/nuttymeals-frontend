@@ -6,6 +6,7 @@ html,body{
   background: #fafafa;
   font-family: 'Hind Madurai', sans-serif;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 @font-face {
     font-family: "brandon";
@@ -309,6 +310,28 @@ nav .navbar-content{
   text-transform: uppercase;
   justify-content: space-between;
   width: 100%;
+}
+.input-container.phone
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.input-container.phone span
+{
+  display: inline-block;
+  background: #e8e8e8;
+    width: 10%;
+    color: #6f6f6f;
+    height: 34px;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input-container.phone input
+{
+      width: 50.1%!important;
 }
 .modal{
   width: 30%;

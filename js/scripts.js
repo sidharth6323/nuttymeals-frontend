@@ -22,8 +22,8 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
   $scope.active_review=1;
-  $scope.api_domain = "https://nuttymeals.pythonanywhere.com";
-  //$scope.api_domain = "http://localhost:8000"
+  //$scope.api_domain = "https://nuttymeals.pythonanywhere.com";
+  $scope.api_domain = "http://localhost:8000"
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
@@ -246,7 +246,7 @@ app.controller("mainCtrl",function($scope,$http){
       $scope.login();
       $scope.activeModal="";
     },function(response){
-      $scope.signupError = response.data;
+      $scope.signupError = response.data.error;
     });
     $scope.signupLoading=0;
   }
