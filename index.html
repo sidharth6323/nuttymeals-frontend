@@ -426,9 +426,6 @@
           <li id="contact_btn" ng-click="scroll_to('contact')">
             Contact Us
           </li>
-          <li>
-            NuttyBites
-          </li>
           <li class="account" ng-click="activeModal='login'" ng-show="loggedIn==0">
             <i class="fa fa-sign-in" aria-hidden="true"></i>
             Login
@@ -513,7 +510,7 @@
     </div>
     <div class="content">
       <div class="plans-container">
-        <div class="plan" ng-click="select_plan(plan.id)" ng-repeat="plan in allPlans | filter:{'duration':duration}">
+        <div class="plan" ng-click="select_plan(plan.id)" ng-repeat="plan in allPlans | filter:{'duration':duration}:true">
           <div class="planImg">
             <img src="img/{{plan.p_name}}.png" width="150" style="drop-shadow:10px 10px 10px #000"/>
           </div>
@@ -599,7 +596,7 @@
           <i class="fa fa-chevron-right sm-hidden" aria-hidden="true" ng-click="active_review=2"></i>
         </div>
         <div class="card-footer">
-          <span>Sidharth Kumar,</span> CEO, bohot badi company
+          <span>Sidharth Kumar,</span> Student, RNSIT College
         </div>
       </div>
       <div class="card" ng-show="active_review==2">
@@ -611,7 +608,7 @@
           <i class="fa fa-chevron-right sm-hidden" aria-hidden="true" ng-click="active_review=3"></i>
         </div>
         <div class="card-footer">
-          <span>Sidharth Kumar,</span> CEO, bohot badi company
+          <span>Shreyasvi Nataraj,</span> Student, R.V. College
         </div>
       </div>
       <div class="card" ng-show="active_review==3">
@@ -623,7 +620,7 @@
           <i class="fa fa-chevron-right sm-hidden" aria-hidden="true" ng-click="active_review=1"></i>
         </div>
         <div class="card-footer">
-          <span>Sidharth Kumar,</span> CEO, bohot badi company
+          <span>Rishabh Deo,</span> Student, RNSIT College
         </div>
       </div>
       <div class="dots">
@@ -658,9 +655,13 @@
           </div>
       </div>
       <div class="social">
-        <i class="fa fa-facebook" aria-hidden="true"></i>
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-        <i class="fa fa-linkedin" aria-hidden="true"></i>
+        <a href="https://www.facebook.com/nuttymeals/">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.instagram.com/nutrymeals">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+        <i class="fa fa-play" aria-hidden="true"></i>
       </div>
     </div>
   </footer>
