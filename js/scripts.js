@@ -242,6 +242,7 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.login = function(){
     $scope.loginError="";
     $scope.loginLoading=1;
+    $('.loader-container').show();
     $http({
       method:"POST",
       url : $scope.api_domain + "/api/login/",
@@ -255,12 +256,14 @@ app.controller("mainCtrl",function($scope,$http){
       $scope.loginError = "Wrong Username or password";
     });
     $scope.loginLoading=0;
+    $('.loader-container').hide();
   };
 
 
   $scope.signup = function(){
     $scope.signupError="";
     $scope.signupLoading=1;
+    $('.loader-container').show();
     $http({
       method:"POST",
       url : $scope.api_domain + "/api/signup/",
@@ -273,6 +276,7 @@ app.controller("mainCtrl",function($scope,$http){
       $scope.signupError = response.data.error;
     });
     $scope.signupLoading=0;
+    $('.loader-container').show();
   }
   $scope.scroll_to = function(section){
       $('html, body').animate({
