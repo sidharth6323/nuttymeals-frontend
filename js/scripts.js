@@ -162,7 +162,7 @@ app.controller("mainCtrl",function($scope,$http){
     }
     if($scope.currentUser.sign_by_referral)
     {
-      $scope.discount = 0.3*$scope.final_order_price;
+      $scope.discount = (0.3*$scope.final_order_price).toFixed(0);
       if($scope.discount>100)
       {
         $scope.discount=100;
