@@ -292,10 +292,13 @@
             <i class="fa fa-plus-circle" ng-click="qty= qty==5?qty:qty+1" aria-hidden="true"></i>
             <i class="fa fa-minus-circle" ng-click="qty= qty==1?qty:qty-1" aria-hidden="true"></i>
           </div>
-          <div class="boxinput-container beige-btn" >
+          <div class="boxinput-container beige-btn" ng-click="place_order()">
             <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            <input type="button" value="Login and Subscribe" ng-show="!loggedIn==1" ng-click="activeModal='login';plan_modal=0"/>
-            <input type="button" value="Continue" ng-show="loggedIn==1" ng-click="place_order()" />
+            <input type="button" value="Continue" ng-show="loggedIn==1"  />
+          </div>
+          <div class="boxinput-container beige-btn" ng-show="!loggedIn==1" ng-click="activeModal='login';plan_modal=0">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            <input type="button" value="Login and Subscribe" />
           </div>
         </div>
       </div>
@@ -318,9 +321,16 @@
            {{current_plan[0].p_name}}</br>
          </h4>
          <span class="qty">Quantity : {{qty}}</span>
-         <span class="final_price">Price : &#8377 {{final_order_price}}</span>
+         <span class="final_price">Price : &#8377 {{final_order_price}}</br><small ng-show="discount">( with &#8377 {{discount}} discount )</small></span>
+
         </div>
-        <form id="addressForm">
+        <div class="nodelivery" ng-show="duration==1 && !delivery">
+          <h3>You have opted for no delivery. </br>Please Pickup your order from Nuttymeals Pickup store.</h3>
+          <a target="_blank" href="https://www.google.co.in/maps/place/Nutty+Meals/@12.776204,68.5919111,5z/data=!4m8!1m2!2m1!1snuttymeals!3m4!1s0x3bae3fa6c84ddf81:0xe5733e80df937b82!8m2!3d12.9020326!4d77.5202511?hl=en">
+            <h4>Navigate to nuttymeals</h4>
+          </a>
+        </div>
+        <form id="addressForm" ng-hide="duration==1 && !delivery">
           <div class="address">
             <div class="text-input-container">
               <div class="input-container">
@@ -345,7 +355,7 @@
           <input type="hidden" name="hash_string" value="{{hash_data.hash_string}}" />
           <input type="hidden" name="hash"  value="{{hash_data.hashh}}"/>
           <input type="hidden" name="txnid" value="{{hash_data.txnid}}"/>
-          <input type="hidden" name="udf1" value="{{address1}}, {{address2}}, {{pincode}}"/>
+          <input type="hidden" name="udf1" value="{{address}}"/>
           <input type="hidden" name="udf2" value="{{qty}}"/>
           <input type="hidden" name="udf3" value="{{delivery}}"/>
           <table >
@@ -382,12 +392,14 @@
           </table>
           <input type="submit" value="Submit"  />
         </form>
-          <div class="boxinput-container beige-btn" >
+          <div class="boxinput-container beige-btn" ng-show="loggedIn==1" ng-click="document.getElementById(payuform).submit()">
             <i class="fa fa-check-circle" aria-hidden="true"></i>
-
-            <input type="button" value="Login and Subscribe" ng-show="!loggedIn==1" ng-click="activeModal='login';plan_modal=0"/>
-            <input type="submit" value="Pay and Subscribe" form="payuform" ng-show="loggedIn==1"/>
-        </div>
+            <input type="submit" value="Pay and Subscribe" form="payuform" />
+          </div>
+          <div class="boxinput-container beige-btn" ng-show="!loggedIn==1" ng-click="activeModal='login';plan_modal=0">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+            <input type="button" value="Login and Subscribe" />
+          </div>
       </div>
     </div>
   </div>
@@ -529,8 +541,8 @@
         <div class="time" ng-click="duration=14;time='2weeks'" ng-class="{'active':time=='2weeks'}">
           <span>2 Weeks</span>
         </div>
-        <div class="time" ng-click="duration=1;time='1time'" ng-class="{'active':time=='1time'}">
-          <span>One Time</span>
+        <div class="time" ng-click="duration=1;time='1day'" ng-class="{'active':time=='1day'}">
+          <span>One Day</span>
         </div>
       </div>
     </div>
@@ -570,7 +582,7 @@
         <span><h4>Get 30% OFF</h4> on all orders above 150</span>
         <small>*offer applicable upto Rs. 100 only for new users signed by referal</small>
       </div>
-      <div class="boxinput-container">
+      <div class="boxinput-container" >
         <input type="button" value="SIGN UP NOW" ng-click="activeModal='signup'"/>
       </div>
     </div>

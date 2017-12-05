@@ -19,14 +19,18 @@ app.config(function(uiGmapGoogleMapApiProvider){
 });
 
 app.controller("mainCtrl",function($scope,$http){
+  $(window).on("load",function(){
+    $scope.main_loading=0;
+  });
   $scope.activeModal = "";
   $scope.loginLoading = 0;
   $scope.active_review=1;
-  $scope.api_domain = "https://nuttymeals.pythonanywhere.com";
-  //$scope.api_domain = "http://localhost:8000"
+  //$scope.api_domain = "https://nuttymeals.pythonanywhere.com";
+  $scope.api_domain = "http://localhost:8000"
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
+  $scope.discount=0;
   $scope.meal_type = '';
   $scope.addons = "";
   $scope.show_addon=0;
@@ -77,9 +81,14 @@ app.controller("mainCtrl",function($scope,$http){
     console.log($scope.pincode);
     if($scope.address1==null || $scope.address2==null || $scope.pincode==null || $scope.address1=="" || $scope.address2=="" || $scope.pincode==""  )
     {
-      console.log("called2")
+      if(!($scope.duration==1 && !$scope.delivery))
+      {
+        console.log("called2")
+        e.preventDefault();
+        alert("Please Fill all the address fields!")
+      }
       e.preventDefault();
-      alert("Please Fill all the address fields!")
+      $scope.get_payuhash();
     }
     else {
       e.preventDefault();
@@ -100,10 +109,17 @@ app.controller("mainCtrl",function($scope,$http){
     var session = getCookie('s_id');
     if(session.length!=0)
     {
+      if($scope.delivery==true)
+        $scope.address=$scope.address1+", "+$scope.address2+", "+$scope.pincode;
+      else {
+        $scope.address="";
+      }
+      $('.loader-container').show();
+      $('.loader-container').css('display','block');
       $http({
         method:"POST",
         url : $scope.api_domain + "/api/get/payu_hash",
-        data : {email:$scope.currentUser.user.email,amount:$scope.final_order_price,product_info:$scope.current_plan[0].p_name,firstname:$scope.currentUser.user.username,udf1:$scope.address1+", "+$scope.address2+", "+$scope.pincode,udf2:$scope.qty,udf3:$scope.delivery,addons:$scope.addons,meal_type:$scope.meal_type},
+        data : {email:$scope.currentUser.user.email,amount:$scope.final_order_price,product_info:$scope.current_plan[0].p_name,firstname:$scope.currentUser.user.username,udf1:$scope.address,udf2:$scope.qty,udf3:$scope.delivery,duration:$scope.duration,addons:$scope.addons,meal_type:$scope.meal_type},
         headers: {'Authorization': "Token "+session}
       }).then(function(response){
         console.log(response.data);
@@ -144,7 +160,15 @@ app.controller("mainCtrl",function($scope,$http){
       sum = $scope.addon_lunch_chapati + $scope.addon_lunch_curry + $scope.addon_lunch_rice + $scope.addon_dinner_chapati + $scope.addon_dinner_curry + $scope.addon_dinner_rice;
       $scope.final_order_price = $scope.final_order_price + (sum*29);
     }
-
+    if($scope.currentUser.sign_by_referral)
+    {
+      $scope.discount = 0.3*$scope.final_order_price;
+      if($scope.discount>100)
+      {
+        $scope.discount=100;
+      }
+      $scope.final_order_price = $scope.final_order_price-$scope.discount;
+    }
   }
 
   $scope.get_my_orders= function(){

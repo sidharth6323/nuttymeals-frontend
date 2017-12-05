@@ -26,6 +26,12 @@ a{
   height: 100%;
   position: fixed;
   background: rgba(255,255,255,0.9);
+  z-index: 10000;
+}
+.loader-container.ng-hide
+{
+  transition: all ease-in-out 0.5s;
+  opacity: 0;
 }
 .loader-container .loader
 {
@@ -41,8 +47,8 @@ input:focus,textarea:focus
 }
 [ng-click],
 [data-ng-click],
-[x-ng-click] {
-    cursor: pointer;
+[x-ng-click],input[type='button'],input[type='submit'] {
+    cursor: pointer!important;
 }
 .content-wrapper
 {
@@ -415,6 +421,11 @@ nav .navbar-content{
 .beige-btn
 {
   background: #98516e!important;
+  transition: all ease-in-out 0.15s;
+}
+.beige-btn:hover
+{
+  background: #78324f!important;
 }
 .beige-btn input
 {
@@ -1310,7 +1321,10 @@ nav .top-menu-container
 {
   width: 25%!important;
 }
-
+.order_modal .nodelivery
+{
+    text-align: center;
+}
 .order_modal .modal-footer
 {
   margin-top:4%;
