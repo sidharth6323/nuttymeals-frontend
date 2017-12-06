@@ -41,6 +41,7 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.initApp = function(){
     $scope.checklogin();
     $scope.getPlans();
+    $scope.getmenu();
   }
   function getCookie(cname) {
     var name = cname + "=";
@@ -203,6 +204,17 @@ app.controller("mainCtrl",function($scope,$http){
     }).then(function(response){
       console.log(response.data);
       $scope.allPlans=response.data;
+    },function(error){
+      console.log(error);
+    });
+  }
+  $scope.getmenu = function(){
+    $http({
+      method:"GET",
+      url : $scope.api_domain + "/api/get/menu",
+    }).then(function(response){
+      console.log(response.data);
+      $scope.menu=response.data;
     },function(error){
       console.log(error);
     });

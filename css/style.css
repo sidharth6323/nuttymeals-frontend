@@ -308,6 +308,14 @@ small{
 {
   float: left;
 }
+.todays_menu .modal-content h3
+{
+  margin: 7% 0 1%;
+}
+.todays_menu .modal-content
+{
+  padding-bottom: 2%;
+}
 nav .navbar-content{
   display: flex;
   align-items: center;
