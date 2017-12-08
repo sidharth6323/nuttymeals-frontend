@@ -25,8 +25,8 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
   $scope.active_review=1;
-  $scope.api_domain = "https://nuttymeals.pythonanywhere.com";
-  //$scope.api_domain = "http://localhost:8000"
+  //$scope.api_domain = "https://nuttymeals.pythonanywhere.com";
+  $scope.api_domain = "http://localhost:8000"
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
@@ -80,6 +80,26 @@ app.controller("mainCtrl",function($scope,$http){
     console.log($scope.address1);
     console.log($scope.address2);
     console.log($scope.pincode);
+    if($scope.duration==1)
+    {
+      e.preventDefault();
+      console.log($scope.current_plan)
+      $http({
+        method:"POST",
+        url : $scope.api_domain + "/api/get/plan_availability",
+        data : {meal_type:$scope.current_plan[0].meal_type},
+      }).then(function(response){
+        console.log(response.data.status);
+        $scope.availability = response.data.status;
+      },function(){
+        console.log("error in getting hash");
+      });
+      if($scope.availability == "NA")
+      {
+        alert("Sorry! You need to make the booking atleast 2 hour before meal time.");
+        return;
+      }
+    }
     if($scope.address1==null || $scope.address2==null || $scope.pincode==null || $scope.address1=="" || $scope.address2=="" || $scope.pincode==""  )
     {
       if(!($scope.duration==1 && !$scope.delivery))
@@ -288,7 +308,7 @@ app.controller("mainCtrl",function($scope,$http){
       $scope.signupError = response.data.error;
     });
     $scope.signupLoading=0;
-    $('.loader-container').show();
+    $('.loader-container').hide();
   }
   $scope.scroll_to = function(section){
       $('html, body').animate({

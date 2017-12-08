@@ -314,7 +314,8 @@ small{
 }
 .todays_menu .modal-content
 {
-  padding-bottom: 2%;
+  padding-bottom: 5%;
+  padding-left: 7%;
 }
 nav .navbar-content{
   display: flex;
