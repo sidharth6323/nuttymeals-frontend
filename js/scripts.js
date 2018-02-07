@@ -174,11 +174,11 @@ app.controller("mainCtrl",function($scope,$http){
     else {
       $scope.final_order_price = $scope.qty*$scope.current_plan[0].price;
     }
-    if($scope.addon_lunch_chapati!=0 || $scope.addon_lunch_curry!=0 || $scope.addon_lunch_rice!=0 || $scope.addon_dinner_chapati!=0 || $scope.addon_dinner_curry!=0 || $scope.addon_dinner_rice!=0)
+    if($scope.addon_fruit_plate!=0 || $scope.addon_lunch_chapati!=0 || $scope.addon_lunch_curry!=0 || $scope.addon_lunch_rice!=0 || $scope.addon_dinner_chapati!=0 || $scope.addon_dinner_curry!=0 || $scope.addon_dinner_rice!=0)
     {
       console.log("addon changed");
-      $scope.addons = {"lunch":{"chapati":$scope.addon_lunch_chapati,"curry":$scope.addon_lunch_curry,"rice":$scope.addon_lunch_rice},"dinner":{"chapati":$scope.addon_dinner_chapati,"curry":$scope.addon_dinner_curry,"rice":$scope.addon_dinner_rice}}
-      sum = $scope.addon_lunch_chapati + $scope.addon_lunch_curry + $scope.addon_lunch_rice + $scope.addon_dinner_chapati + $scope.addon_dinner_curry + $scope.addon_dinner_rice;
+      $scope.addons = {"breakfast":{"fruit_plate":$scope.addon_fruit_plate},"lunch":{"chapati":$scope.addon_lunch_chapati,"curry":$scope.addon_lunch_curry,"rice":$scope.addon_lunch_rice},"dinner":{"chapati":$scope.addon_dinner_chapati,"curry":$scope.addon_dinner_curry,"rice":$scope.addon_dinner_rice}}
+      sum = $scope.addon_fruit_plate+$scope.addon_lunch_chapati + $scope.addon_lunch_curry + $scope.addon_lunch_rice + $scope.addon_dinner_chapati + $scope.addon_dinner_curry + $scope.addon_dinner_rice;
       $scope.final_order_price = $scope.final_order_price + (sum*29);
     }
     if($scope.currentUser.sign_by_referral)
