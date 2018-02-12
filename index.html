@@ -154,7 +154,7 @@
                 {{order.status}}
               </div>
               <div class="order_amount">
-                &#8377 {{order.amount}}
+                Rs. {{order.amount}}
               </div>
             </div>
             <div class="order-footer">
@@ -193,6 +193,35 @@
         <h3><i class="fa fa-moon-o" aria-hidden="true"></i>
           Dinner :</h3>
         <span>{{menu[0].Dinner}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-container" ng-show="activeModal=='gym_plan'">
+    <div class="modal gym_plan_modal">
+      <div class="modal-header">
+        <h3>
+          <i class="fa fa-superpowers" aria-hidden="true"></i>
+         &nbsp Gym Plan</h3>
+         <i class="fa fa-times pull-right" aria-hidden="true" ng-click="activeModal=''"></i>
+      </div>
+      <div class="modal-content">
+        <div class="tabs-container">
+          <div class="tab" ng-click="active_weight='weight_gain'" ng-class="{'active': active_weight=='weight_gain'}">
+              <img src="img/weight-gain.png" />
+              <span>Weight Gain</span>
+          </div>
+          <div class="tab" ng-click="active_weight='weight_loss'" ng-class="{'active': active_weight=='weight_loss'}">
+              <img src="img/weight-loss.png" />
+              <span>Weight Loss</span>
+          </div>
+        </div>
+        <div class="button">
+          <div class="boxinput-container pull-left sm-hidden" ng-click="send_gym_plan_enquiry()">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            <input type="button" value="Send Enquiry!" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -506,14 +535,31 @@
         <p>
           NuttyMeals delivers everything you need to bring more delicious meals and moments to the table. Every day.
         </p>
-        <div class="boxinput-container menu" ng-click="scroll_to('plan')" id="plan_btn">
-          <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-          <input type="button" value="Explore Plans" />
+        <div class="buttons">
+          <div class="boxinput-container menu" ng-click="scroll_to('plan')" id="plan_btn">
+            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+            <input type="button" value="Explore Plans" />
+          </div>
+          <div class="boxinput-container menu" ng-click="scroll_to('plan')" id="plan_btn">
+            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+            <input type="button" value="View Menu" />
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="section2" id="how">
+  <div class="section2">
+    <div class="section2-container">
+        <img src="img/muscle.png" width="91"/>
+        <div class="section2-inner">
+          <h2>Fuel your Workout with affordable Diet Plans..</h2>
+          <div class="boxinput-container" ng-click="activeModal='gym_plan'">
+            <input type="button" value="ENQUIRE NOW" />
+          </div>
+        </div>
+    </div>
+  </div>
+  <!--<div class="section2" id="how">
     <div class="header">
       <span>How it Works</span>
     </div>
@@ -535,12 +581,33 @@
         <span>We Deliver !</span>
       </div>
     </div>
+  </div>-->
+
+  <div class="poster-section">
+    <div class="content">
+      <div class="flip-container" ng-repeat="i in [1,2,3]" ontouchstart="this.classList.toggle('hover');">
+      	<div class="flipper" >
+      		<div class="front">
+      			<img src="img/poster{{i}}.png"  class="front"/>
+      		</div>
+      		<div class="back back{{i}}">
+            <div class="content">
+              <span ng-show="i==2">Special Early Bird Discounts for First 100 Customers on all Available Meal Plans</span>
+              <span ng-show="i==1">Eat right food as you shed sweat and tears while working out.</span>
+              <span ng-show="i==3">Satisy your supper cravings by visiting our outlet.</span>
+              <div class="boxinput-container" ng-show="i==1" ng-click="activeModal='gym_plan'">
+                <input type="button" value="ENQUIRE NOW" />
+              </div>
+              <div class="boxinput-container" ng-show="i==3">
+                <input type="button" value="Take me there!"  />
+              </div>
+            </div>
+      		</div>
+      	</div>
+      </div>
+    </div>
   </div>
   <div class="section3" id="about">
-    <div class="about-img">
-      <h1 class="only-sm">About Us</h1>
-      <img src="img/about.png" />
-    </div>
     <div class="about-content">
       <h1 class="sm-hidden">About Us</h1>
       <p>

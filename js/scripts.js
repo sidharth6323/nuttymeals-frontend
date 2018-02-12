@@ -25,8 +25,8 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
   $scope.active_review=1;
-  $scope.api_domain = "https://nuttymeals.pythonanywhere.com";
-  //$scope.api_domain = "http://localhost:8000"
+  //$scope.api_domain = "https://nuttymeals.pythonanywhere.com";
+  $scope.api_domain = "http://localhost:8000"
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
@@ -35,6 +35,7 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.addons = "";
   $scope.show_addon=0;
   $scope.time="monthly";
+  $scope.active_weight='';
   $scope.isArray = function(input) {
       return angular.isArray(input);
   };
@@ -74,6 +75,19 @@ app.controller("mainCtrl",function($scope,$http){
       $scope.video_played=1;
       $(".video-container").html("<video width='500' autoplay> <source src='img/about-video.mp4' type='video/mp4'>Your browser does not support the video tag.</video>");
     }
+  }
+  $scope.send_gym_plan_enquiry = function(){
+    var session = getCookie('s_id');
+    $http({
+      method:"GET",
+      url : $scope.api_domain + "/api/get/gym_plan_enquiry/",
+      headers: {'Authorization': "Token "+session}
+    }).then(function(response){
+      $scope.my_orders=response.data;
+      console.log($scope.my_orders)
+    },function(){
+      console.log("didn't get orders");
+    });
   }
   $scope.payuform_submit = function(e){
     console.log("called");
