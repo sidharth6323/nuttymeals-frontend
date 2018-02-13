@@ -349,6 +349,7 @@ app.controller("mainCtrl",function($scope,$http){
     $scope.plan_modal=1;
     $scope.show_addon=0;
     $scope.meal_type='';
+    $scope.addon_fruit_plate = 0;
     $scope.addon_lunch_curry = 0;
     $scope.addon_lunch_chapati = 0;
     $scope.addon_lunch_rice = 0;

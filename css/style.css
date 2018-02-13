@@ -92,13 +92,16 @@ input:focus,textarea:focus
   .section1 .content-container .text-container {
     width: 77%!important;
   }
+  .section1 .boxinput-container {
+    margin-left: 8%!important;
+  }
   .section2
   {
     height: auto!important;
     margin-top: -15%!important;
     background: orange;
     width: 100%!important;
-    padding: 2% 3%!important;
+    padding: 7% 3%!important;
   }
   .section2 .header
   {
@@ -112,7 +115,7 @@ input:focus,textarea:focus
   {
     flex-direction: column;
   }
-  
+
   .section2 .section2-inner
   {
     flex-direction: column;
@@ -120,7 +123,7 @@ input:focus,textarea:focus
   }
   .poster-section
   {
-    height: 177%!important;
+    height: auto!important;
   }
   .poster-section .content
   {
