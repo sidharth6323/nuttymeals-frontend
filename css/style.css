@@ -112,6 +112,7 @@ input:focus,textarea:focus
   {
     flex-direction: column;
   }
+  
   .section2 .section2-inner
   {
     flex-direction: column;
