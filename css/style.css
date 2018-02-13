@@ -8,6 +8,10 @@ html,body{
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
+.fast-spin {
+  -webkit-animation: fa-spin 0.5s infinite linear;
+  animation: fa-spin 0.5s infinite linear;
+}
 @font-face {
     font-family: "brandon";
     src: url("../fonts/Brandon_reg.otf");
@@ -93,6 +97,8 @@ input:focus,textarea:focus
     height: auto!important;
     margin-top: -15%!important;
     background: orange;
+    width: 100%!important;
+    padding: 2% 3%!important;
   }
   .section2 .header
   {
@@ -101,6 +107,27 @@ input:focus,textarea:focus
   }
   .section2 .content {
     flex-direction: column;
+  }
+  .section2 .section2-container
+  {
+    flex-direction: column;
+  }
+  .section2 .section2-inner
+  {
+    flex-direction: column;
+    height: auto!important;
+  }
+  .poster-section
+  {
+    height: 177%!important;
+  }
+  .poster-section .content
+  {
+    flex-direction: column;
+  }
+  .poster-section .flip-container, .front, .back
+  {
+    margin: 3% 0!important;
   }
   .section4
   {

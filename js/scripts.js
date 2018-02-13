@@ -76,17 +76,32 @@ app.controller("mainCtrl",function($scope,$http){
       $(".video-container").html("<video width='500' autoplay> <source src='img/about-video.mp4' type='video/mp4'>Your browser does not support the video tag.</video>");
     }
   }
-  $scope.send_gym_plan_enquiry = function(){
+  $scope.send_gym_plan_enquiry = function(e){
     var session = getCookie('s_id');
+    if(session=="" || session==undefined)
+    {
+      $scope.activeModal="login";
+      return;
+    }
+    if($scope.active_weight=="" || $scope.active_weight==undefined)
+    {
+      alert("Please Select a category first!");
+      return;
+    }
+    console.log(session);
+    console.log(document.getElementById("gym_loader").nextElementSibling);
+    document.getElementById("gym_loader").className = "fa fa-circle-o-notch fast-spin";
+    document.getElementById("gym_loader").nextElementSibling.value = "Sending ..."
     $http({
       method:"GET",
-      url : $scope.api_domain + "/api/get/gym_plan_enquiry/",
+      url : $scope.api_domain + "/api/get/gym_plan_enquiry/?weight="+$scope.active_weight,
       headers: {'Authorization': "Token "+session}
     }).then(function(response){
-      $scope.my_orders=response.data;
-      console.log($scope.my_orders)
+      document.getElementById("gym_loader").className = "fa fa-paper-plane";
+      document.getElementById("gym_loader").nextElementSibling.value = "Send Enquiry!"
+      document.getElementById("gym_modal").innerHTML = "<p style='margin:4% 0;'> Thanks for Enquiry! We will get in touch with you.</p>"
     },function(){
-      console.log("didn't get orders");
+      console.log("didn't send enquiry");
     });
   }
   $scope.payuform_submit = function(e){
