@@ -6,7 +6,9 @@ app.config(function($sceDelegateProvider) {
     'self',
     // Allow loading from our assets domain.  Notice the difference between * and **.
     'https://test.payu.in/_payment',
-    'https://secure.payu.in/_payment'
+    'https://secure.payu.in/_payment',
+    "https://nuttymeals.pythonanywhere.com/api/place_order_cod",
+    "http://localhost:8000/api/place_order_cod"
   ]);
 });
 app.config(function(uiGmapGoogleMapApiProvider){
@@ -36,6 +38,7 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.show_addon=0;
   $scope.time="monthly";
   $scope.active_weight='';
+  $scope.active_gym_time='';
   $scope.isArray = function(input) {
       return angular.isArray(input);
   };
@@ -85,6 +88,11 @@ app.controller("mainCtrl",function($scope,$http){
     }
     if($scope.active_weight=="" || $scope.active_weight==undefined)
     {
+      alert("Please Select a weight first!");
+      return;
+    }
+    if($scope.active_gym_time=="" || $scope.active_gym_time==undefined)
+    {
       alert("Please Select a category first!");
       return;
     }
@@ -94,7 +102,7 @@ app.controller("mainCtrl",function($scope,$http){
     document.getElementById("gym_loader").nextElementSibling.value = "Sending ..."
     $http({
       method:"GET",
-      url : $scope.api_domain + "/api/get/gym_plan_enquiry/?weight="+$scope.active_weight,
+      url : $scope.api_domain + "/api/get/gym_plan_enquiry/?weight="+$scope.active_weight+"&category="+$scope.active_gym_time,
       headers: {'Authorization': "Token "+session}
     }).then(function(response){
       document.getElementById("gym_loader").className = "fa fa-paper-plane";
@@ -135,7 +143,8 @@ app.controller("mainCtrl",function($scope,$http){
       {
         console.log("called2")
         e.preventDefault();
-        alert("Please Fill all the address fields!")
+        alert("Please Fill all the address fields!");
+        return;
       }
       e.preventDefault();
       $scope.get_payuhash();
@@ -164,6 +173,7 @@ app.controller("mainCtrl",function($scope,$http){
       else {
         $scope.address="";
       }
+      $scope.address=$scope.address1+", "+$scope.address2+", "+$scope.pincode;
       $('.loader-container').show();
       $('.loader-container').css('display','block');
       $http({
@@ -176,7 +186,16 @@ app.controller("mainCtrl",function($scope,$http){
         $scope.hash_data = response.data;
         console.log("ainwayi");
         console.log("hhg");
-        setTimeout(function(){document.getElementById("payuform").submit();},2000);
+        $http({
+          method:"POST",
+          url : $scope.api_domain + "/api/place_order_cod",
+          data : {"txnid":$scope.hash_data.txnid},
+          headers: {'Authorization': "Token "+session}
+        }).then(function(response){
+          console.log("done")
+          window.location.href = '/payment/success.html'
+      });
+        //setTimeout(function(){document.getElementById("codform").submit();},2000);
       },function(){
         console.log("error in getting hash");
       });
@@ -185,7 +204,6 @@ app.controller("mainCtrl",function($scope,$http){
       $scope.loggedIn=0;
     }
   }
-
   $scope.place_order = function(){
     if($scope.meal_type.length==0)
     {

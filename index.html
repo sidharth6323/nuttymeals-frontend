@@ -185,14 +185,18 @@
          <i class="fa fa-times pull-right" aria-hidden="true" ng-click="activeModal=''"></i>
       </div>
       <div class="modal-content">
-        <h3><i class="fa fa-coffee" aria-hidden="true"></i>
-          Breakfast :</h3>
-        <span>{{menu[0].Breakfast}}</span>
-        <h3> <i class="fa fa-sun-o" aria-hidden="true"></i> Lunch :</h3>
-        <span>{{menu[0].Lunch}}</span>
-        <h3><i class="fa fa-moon-o" aria-hidden="true"></i>
-          Dinner :</h3>
-        <span>{{menu[0].Dinner}}</span>
+        <div class="item">
+          <h3><i class="fa fa-coffee" aria-hidden="true"></i></h3>
+          <span><b>Breakfast :</b><br />{{menu[0].Breakfast}}</span>
+        </div>
+        <div class="item">
+          <h3><i class="fa fa-sun-o" aria-hidden="true"></i></h3>
+          <span><b>Lunch :</b><br />{{menu[0].Lunch}}</span>
+        </div>
+        <div class="item">
+          <h3><i class="fa fa-moon-o" aria-hidden="true"></i></h3>
+          <span><b>Dinner :</b><br />{{menu[0].Dinner}}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -206,6 +210,7 @@
          <i class="fa fa-times pull-right" aria-hidden="true" ng-click="activeModal=''"></i>
       </div>
       <div class="modal-content" id="gym_modal">
+        <span>Please Select weight type : </span>
         <div class="tabs-container">
           <div class="tab" ng-click="active_weight='weight_gain'" ng-class="{'active': active_weight=='weight_gain'}">
               <img src="img/weight-gain.png" />
@@ -214,6 +219,15 @@
           <div class="tab" ng-click="active_weight='weight_loss'" ng-class="{'active': active_weight=='weight_loss'}">
               <img src="img/weight-loss.png" />
               <span>Weight Loss</span>
+          </div>
+        </div>
+        <span>Please Select Category : </span>
+        <div class="time-tabs-container">
+          <div class="tab" ng-click="active_gym_time='Monthly'" ng-class="{'active': active_gym_time=='Monthly'}">
+              <span>Monthly</span>
+          </div>
+          <div class="tab" ng-click="active_gym_time='OneTime'" ng-class="{'active': active_gym_time=='OneTime'}">
+              <span>One time @Rs. 79</span>
           </div>
         </div>
         <div class="button">
@@ -413,6 +427,10 @@
         </form>
       </div>
       <div class="modal-footer">
+        <form ng-submit="codform_submit($event)" action="{{hash_data.cod_action}}"  name="codform" id="codform" method="post" style="display:none">
+          <input type="hidden" name="txnid" value="{{hash_data.txnid}}"/>
+          <input type="hidden" name="Authorization" value="Token {{session}}" />
+        </form>
         <form action="{{hash_data.action}}"  name="payuform" id="payuform" method="post" ng-submit="payuform_submit($event)" style="display:none">
           <input type="hidden" name="key" value="{{hash_data.posted.key}}" />
           <input type="hidden" name="hash_string" value="{{hash_data.hash_string}}" />
@@ -457,7 +475,7 @@
         </form>
           <div class="boxinput-container beige-btn" ng-show="loggedIn==1" ng-click="document.getElementById(payuform).submit()">
             <i class="fa fa-check-circle" aria-hidden="true"></i>
-            <input type="submit" value="Pay and Subscribe" form="payuform" />
+            <input type="submit" value="Subscribe" form="payuform" />
           </div>
           <div class="boxinput-container beige-btn" ng-show="!loggedIn==1" ng-click="activeModal='login';plan_modal=0">
             <i class="fa fa-check-circle" aria-hidden="true"></i>

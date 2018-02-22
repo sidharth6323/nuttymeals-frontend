@@ -340,9 +340,34 @@ small{
 {
   float: left;
 }
-.todays_menu .modal-content h3
+.todays_menu
 {
-  margin: 7% 0 1%;
+  padding: 0!important;
+}
+.todays_menu .modal-header
+{
+  padding: 3%;
+  background: #FFD500;
+  color: black;
+  text-align: left;
+}
+.todays_menu .modal-header i
+{
+  color: black;
+}
+.todays_menu .modal-content .item
+{
+  display: flex;
+  align-items: center;
+}
+.todays_menu .modal-content .item h3
+{
+    margin-right: 4%;
+}
+.todays_menu .modal-content .item i
+{
+  font-size: 3em;
+  color: #FFD500;
 }
 .todays_menu .modal-content
 {
@@ -645,8 +670,13 @@ nav .top-menu-container
 .section1
 {
   background: url('../img/main-back.jpg');
+  min-height: 500px; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 60%;
-  background-size: 100%;
+  //background-size: 100%;
   min-height: 496px;
   width: 100%;
   padding-top: 5%;
@@ -1190,18 +1220,37 @@ nav .top-menu-container
 {
   border: 6px solid #888;
 }
+.gym_plan_modal .modal-content
+{
+  padding-top: 10%;
+  padding-left: 4%;
+}
 .gym_plan_modal .tabs-container
 {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
+.gym_plan_modal .time-tabs-container
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.gym_plan_modal .modal-content .time-tabs-container .tab
+{
+  margin-top: 5%;
+  text-align: center;
+  margin-bottom: 5%;
+  width: 30%;
+  padding: 4% 0;
+}
 .gym_plan_modal .modal-content .tab
 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 12%;
+  margin-top: 2%;
   margin-bottom: 8%;
   width: 30%;
   padding: 4% 0;
