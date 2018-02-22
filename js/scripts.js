@@ -201,6 +201,7 @@ app.controller("mainCtrl",function($scope,$http){
         $scope.hash_data = response.data;
         console.log("ainwayi");
         console.log("hhg");
+        var session = getCookie('s_id');
         $http({
           method:"POST",
           url : $scope.api_domain + "/api/place_order_cod",
