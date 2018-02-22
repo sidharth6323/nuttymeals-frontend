@@ -21,6 +21,7 @@ app.config(function(uiGmapGoogleMapApiProvider){
 
 });
 
+
 app.controller("mainCtrl",function($scope,$http){
   $(window).on("load",function(){
     $scope.main_loading=0;
