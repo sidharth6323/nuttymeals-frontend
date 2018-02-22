@@ -95,6 +95,11 @@ input:focus,textarea:focus
   .section1 .boxinput-container {
     margin-left: 8%!important;
   }
+  .section1 .section1-content .app
+  {
+    margin-left: 0%!important;
+    margin-bottom: 3%;
+  }
   .section2
   {
     height: auto!important;
@@ -103,6 +108,14 @@ input:focus,textarea:focus
     width: 100%!important;
     padding: 7% 3%!important;
   }
+  .section2 .section2-container img
+  {
+    width: 50px!important;
+  }  
+  .section2 .section2-container .section2-inner h2
+  {
+    font-size: 1.7em!important;
+  }  
   .section2 .header
   {
     padding: 3.8% 2%!important;
@@ -695,7 +708,7 @@ nav .top-menu-container
 {
   display: inline-block;
   width: 50%;
-  padding-top: 3%;
+  padding-top: 2%;
 }
 .section1 .section1-content h1
 {
@@ -741,6 +754,31 @@ nav .top-menu-container
 {
   color: white;
 }
+.section1 .section1-content .app
+{
+  display: flex;
+  margin-left: 20%;
+  margin-top: 8%;
+}
+.section1 .section1-content .app .app-item
+{
+  display: flex;
+  align-items: center;
+  margin: 0 10%;
+}
+.section1 .section1-content .app .icon
+{
+  height: 42px;
+  margin: 0 8%;
+}
+.section1 .section1-content .app .app-item span
+{
+  display:block;
+}
+.section1 .section1-content .app .app-item.ios .icon
+{
+  margin: 0 20% 0 0;
+} 
 .section2
 {
     width: 88%;
@@ -801,6 +839,15 @@ nav .top-menu-container
   width: 80%;
   margin-top: 4%;
 }
+.section3 .menu
+{
+  background: #a63697;
+  color: white!important;
+}
+.section3 .menu input
+{
+  color: white!important;
+}
 .section3 h1
 {
   color: #607b82;
@@ -830,7 +877,7 @@ nav .top-menu-container
   min-height: 413px;
   box-shadow: 0px 0px 42px 0.2px rgba(46,61,73,.05);
   margin-left: 5%;
-  margin-top: 5%;
+  margin-top: 3%;
   padding: 1% 0;
   background: #FAFAFA;
   margin-bottom: 5%;
@@ -1736,6 +1783,7 @@ footer .footer2 .social i
   {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 10%!important;
   }
   .section3 .about-img
   {
@@ -1771,10 +1819,14 @@ footer .footer2 .social i
   .section6 .content
   {
     flex-direction: column;
-    padding: 4% 4%;
+    padding: 10% 4%;
     align-items: center;
     width: 100%;
     text-align: center;
+  }
+  .section7
+  {
+    padding: 11% 0!important;
   }
   .section7 .header
   {
