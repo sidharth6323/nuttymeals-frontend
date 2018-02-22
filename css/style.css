@@ -1713,7 +1713,7 @@ footer .footer2 .social i
 {
   .section1
   {
-    background-size: 900% 100%;
+    background-size: 900% 100%!important;
   }
   .section1 .section1-content
   {
