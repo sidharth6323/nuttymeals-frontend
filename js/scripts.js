@@ -8,7 +8,7 @@ app.config(function($sceDelegateProvider) {
     'https://test.payu.in/_payment',
     'https://secure.payu.in/_payment',
     "https://nuttymeals.pythonanywhere.com/api/place_order_cod",
-    "http://nuttymeals.nhh6b7byn2.us-west-2.elasticbeanstalk.com/"
+    "http://nuttymeals.nhh6b7byn2.us-west-2.elasticbeanstalk.com/",
     "http://localhost:8000/api/place_order_cod"
   ]);
 });
