@@ -8,6 +8,7 @@ app.config(function($sceDelegateProvider) {
     'https://test.payu.in/_payment',
     'https://secure.payu.in/_payment',
     "https://nuttymeals.pythonanywhere.com/api/place_order_cod",
+    "http://nuttymeals.nhh6b7byn2.us-west-2.elasticbeanstalk.com/"
     "http://localhost:8000/api/place_order_cod"
   ]);
 });
@@ -27,8 +28,8 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.activeModal = "";
   $scope.loginLoading = 0;
   $scope.active_review=1;
-  //$scope.api_domain = "https://nuttymeals.pythonanywhere.com";
-  $scope.api_domain = "http://localhost:8000"
+  $scope.api_domain = "http://nuttymeals.nhh6b7byn2.us-west-2.elasticbeanstalk.com";
+  //$scope.api_domain = "http://localhost:8000"
   $scope.loggedIn=0;
   $scope.userMenu=0;
   $scope.duration=30;
@@ -46,6 +47,17 @@ app.controller("mainCtrl",function($scope,$http){
     $scope.checklogin();
     $scope.getPlans();
     $scope.getmenu();
+  }
+  window.onscroll = function() {myFunction()};
+  function myFunction() {
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+    console.log("called sticky")
+    if (window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky")
+    } else {
+      navbar.classList.remove("sticky");
+    }
   }
   function getCookie(cname) {
     var name = cname + "=";
