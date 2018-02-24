@@ -89,7 +89,7 @@
         <div class="form-error" ng-show="signupError">
           <span>{{signupError}}</span>
         </div>
-        <form class="loginForm" ng-submit="signup()">
+        <form class="loginForm" ng-submit="send_verification()">
           <div class="input-container">
             <i class="fa fa-envelope" aria-hidden="true"></i>
             <input type="email" ng-model="email" required placeholder="Enter your Email" />
@@ -125,7 +125,40 @@
     </div>
   </div>
 
-
+  
+  <div class="modal-container" ng-show="activeModal=='codeModal'">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>
+          <i class="fa fa-circle-o-notch" aria-hidden="true" ng-show="signupLoading"></i>
+          <i class="fa fa-user-plus" aria-hidden="true" ng-show="!signupLoading"></i>
+         &nbsp Enter Verification Code</h3>
+         <i class="fa fa-times pull-right" aria-hidden="true" ng-click="activeModal=''"></i>
+      </div>
+      <div class="modal-content">
+        <div class="form-error" ng-show="signupError">
+          <span>{{signupError}}</span>
+        </div>
+        <form class="loginForm" ng-submit="signup()">
+          <div class="input-container">
+            <i class="fa fa-mobile" aria-hidden="true"></i>
+            <input type="number" ng-model="verification_code_entered" required placeholder="Enter Verfication Code" />
+          </div>
+          <div class="input-container">
+            <input type="submit" value="SIGNUP" />
+          </div>
+          <small ng-click="activeModal='login'">Already have an account?  Login</small>
+          <br />
+          <small>or</small>
+        </form>
+        <div class="app-download">
+          <img src="img/play_store.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
   <div class="modal-container" ng-show="activeModal=='my_orders_modal'">
     <div class="modal my_orders_modal">
       <div class="modal-header">

@@ -42,6 +42,7 @@ app.controller("mainCtrl",function($scope,$http){
   $scope.show_addon=0;
   $scope.time="monthly";
   $scope.active_weight='';
+  $scope.verification_code='';
   $scope.active_gym_time='';
   $scope.isArray = function(input) {
       return angular.isArray(input);
@@ -352,13 +353,40 @@ app.controller("mainCtrl",function($scope,$http){
     });
     $scope.loginLoading=0;
     $('.loader-container').hide();
-  };
+  }
 
-
+  $scope.send_verification = function(){
+    $scope.verification_code = Math.floor(100000 + Math.random() * 900000);
+    $('.loader-container').show();
+    $('.loader-container').css('display','block');
+    $scope.signupError="";
+    $http({
+      method:"POST",
+      url : $scope.api_domain + "/api/send_verification/",
+      data:{"email":$scope.email,"username":$scope.username,"phone":$scope.phone,"referral_code_signup":$scope.referral,"verification_code":$scope.verification_code}
+    }).then(function(response){
+      $scope.activeModal="codeModal";
+      $('.loader-container').hide();
+      $('.loader-container').css('display','none');
+    },function(response){
+      $scope.signupError = response.data.error;
+      $('.loader-container').hide();
+      $('.loader-container').css('display','none');
+    });
+  }
   $scope.signup = function(){
     $scope.signupError="";
     $scope.signupLoading=1;
     $('.loader-container').show();
+    $('.loader-container').css('display','block');
+    if($scope.verification_code!=$scope.verification_code_entered)
+    {
+      $scope.signupError="Wrong Verification Code!";
+      $scope.signupLoading=0;
+      $('.loader-container').hide();
+      $('.loader-container').css('display','none');
+      return;
+    }
     $http({
       method:"POST",
       url : $scope.api_domain + "/api/signup/",
@@ -367,11 +395,14 @@ app.controller("mainCtrl",function($scope,$http){
       $scope.username=response.data.user.username;
       $scope.login();
       $scope.activeModal="";
+      $('.loader-container').hide();
+      $('.loader-container').css('display','none');
     },function(response){
       $scope.signupError = response.data.error;
+      $('.loader-container').hide();
+      $('.loader-container').css('display','none');
     });
     $scope.signupLoading=0;
-    $('.loader-container').hide();
   }
   $scope.scroll_to = function(section){
       $('html, body').animate({
