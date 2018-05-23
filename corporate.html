@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NuttyMeals</title>
+  <meta name="description" content="NuttyMeals">
+  <meta name="theme-color" content="#f9f9f9"  />
+  <meta name="author" content="NuttyMeals">
+  <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:30|Hind+Madurai" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-sanitize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+  <link rel="stylesheet" href="css/style-corp.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+  <script type="text/javascript" src="js/angular-simple-logger.js"></script>
+  <script src="js/angular-google-maps.min.js"></script>
+  <script src="js/scripts-corp.js"></script>
+</head>
+<script>
+
+
+  /*$('body').imagesLoaded( { background: true }, function() {
+    $('.loader-container').fadeOut(1000);
+  });*/
+  $(window).on("load",function(){
+    $('.loader-container').fadeOut(1000);
+  });
+</script>
+
+<body ng-app="nuttymeals" ng-controller="mainCtrl" ng-init="initApp()">
+  <div class="font_preload" style="opacity: 0">
+    <span style="font-family: 'brandon', Arial, sans-serif;"></span>
+    <span style="font-family: 'golden', Arial, sans-serif;"></span>
+  </div>
+  <div class="loader-container" id="loading">
+    <div class="loader">
+      <img src="img/loader.gif" width="200px"/>
+    </div>
+  </div>
+  <nav id="navbar">
+    <div class="content-wrapper navbar-content">
+      <div class="icon-corp">
+        <img class="icon" src="img/logo.png" />
+        <span class="line"></span>
+        <span>Corporate</span>
+      </div>
+      <div class="top-menu-container only-sm">
+        <ul>
+          <li class="account" ng-click="activeModal='login'" ng-show="loggedIn==0">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Login
+          </li>
+          <li class="account" ng-click="userMenu=!userMenu" ng-show="loggedIn==1">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            {{currentUser.user.username}}
+            <div class="account-menu" ng-show="userMenu">
+              <div class="menu">
+                <div class="menu-item" ng-click="activeModal='my_orders_modal';get_my_orders()">
+                  My Orders
+                </div>
+                <div class="menu-item" ng-click="logout()">
+                  Logout
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="top-menu-container sm-hidden">
+        <ul>
+          <li id="about_btn" >
+            <a href="http://nuttymeals.com">GO TO HOME</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+  <div class="section1">
+    <div class="container">
+      <div class="card card1">
+        <div class="icon">
+          <i class="fa fa-user-o" aria-hidden="true"></i>
+        </div>
+        <h4>Meet a Representative</h4>
+        <p>
+          A representative from our team will get in touch with you and schedule a session with you
+        </p>
+      </div>
+      <div class="card card1">
+        <div class="icon">
+          <i class="fa fa-cutlery" aria-hidden="true"></i>
+        </div>
+        <h4>Food Sample Demo</h4>
+        <p>
+          Our representative will provide a full scale demo of our food, with finger licking dishes and meals
+        </p>
+      </div>
+      <div class="card card1">
+        <div class="icon">
+          <i class="fa fa-handshake-o" aria-hidden="true"></i>
+        </div>
+        <h4>Final Signup</h4>
+        <p>
+          We will also understand your specific needs and tailor the solution as per your need
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="section2">
+    <div class="corp-text">
+      <h2>NuttyMeals - Delicious Twist to Office Meals</h2>
+      <p>
+        NuttyMeals adds flair, color and excitement to office meals, office catering, office get-togethers and parties. Gourmet items cooked healthy and served in stylish packaging which are delicious, safe, healthy and can reduce your expenses by upto 30%.
+      </p>
+      <strong>Now, office meals don't have to be boring!</strong>
+    </div>
+    <div class="corp-img">
+      <img src="img/corp-girl.png" />
+    </div>
+  </div>
+  <div class="section3" id="why">
+    <div class="header">
+      <h1>Why Us ?</h1>
+    </div>
+    <div class="content">
+      <div class="text-content">
+        <div class="why">
+          <img src="img/why1.png">
+          <h4>Wide Variety : <span> Pinky Swear, the dishes won’t be repeated for two weeks. Say
+            goodbye to monotonous food.</span></h4>
+        </div>
+        <div class="why">
+          <img src="img/why2.png">
+          <h4>Quality Food :<span> We maintain the highest standards of hygiene and
+            deliver the food in heat/warm compatible boxes.</span></h4>
+        </div>
+        <div class="why">
+          <img src="img/why3.png">
+          <h4>Easy Cancellation and Ordering : <span>With the option of
+            ordering/cancellation of food from both website and app we give you all the
+            flexibility.</span></h4>
+        </div>
+      </div>
+      <div class="image-content">
+        <img src="img/whyus.jpg">
+      </div>
+    </div>
+  </div>
+  <div class="section4">
+    <div class="back">
+
+    </div>
+    <div class="card">
+      <h2>TESTIMONIALS</h2>
+      <hr />
+      <h3>What some of our clients and customers have to say</h3>
+      <div class="testimony" ng-show="activeTestimony==1">
+        <p>
+          We get great variety of food through NextUp, at reasonable prices. Employees are never bored and rarely need to step out for their lunches.
+        </p>
+        <h6>Gopal Sharma</h6>
+        <small>( Admin, Salesforce )</small>
+      </div>
+      <div class="testimony" ng-show="activeTestimony==2">
+        <p>
+          We get great variety of food through NextUp, at reasonable prices. Employees are never bored and rarely need to step out for their lunches.
+        </p>
+        <h6>Gopal Sharma 2</h6>
+        <small>( Admin, Salesforce )</small>
+      </div>
+      <div class="testimony" ng-show="activeTestimony==3">
+        <p>
+          We get great variety of food through NextUp, at reasonable prices. Employees are never bored and rarely need to step out for their lunches.
+        </p>
+        <h6>Gopal Sharma 3</h6>
+        <small>( Admin, Salesforce )</small>
+      </div>
+    </div>
+  </div>
+  <div class="section5">
+    <h2>Contact Us</h2>
+    <hr />
+    <h3>Initiate your step towards delicious food everyday</h3>
+    <div class="container">
+      <div class="left-column">
+        <h2>Contact Info</h2>
+        <div class="contact">
+          <i class="fa fa-home" aria-hidden="true"></i>
+          Channasandra, Srinivaspura, <br />Bengaluru, Karnataka 560098
+        </div>
+        <div class="contact">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          085060 00091
+        </div>
+        <div class="contact">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          support@nuttymeals.com
+        </div>
+      </div>
+      <div class="right-column">
+        <h2>Contact Form</h2>
+        <form>
+          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Email" />
+          <input type="text" placeholder="Phone" />
+          <input type="text" placeholder="Address" />
+          <textarea placeholder="message" style="resize:none"></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer2">
+      <div class="icon sm-hidden">
+        <img src="img/logo.png" width="200px" height="65px"/>
+      </div>
+      <div class="buttons sm-hidden">
+        <p>About Us</p>
+        <p>How it Works?</p>
+        <p>Why Us?</p>
+        <p>FAQ's</p>
+        <p>Contact Us</p>
+      </div>
+      <div class="map sm-hidden">
+        <div class="map-container">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+              <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"
+                              labelClass="something" labelAnchor="100 0" labelContent="LabhExim">
+              </ui-gmap-marker>
+            </ui-gmap-google-map>
+          </div>
+      </div>
+      <div class="social">
+        <a href="https://www.facebook.com/nuttymeals/">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.instagram.com/nutrymeals">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+        <i class="fa fa-play" aria-hidden="true"></i>
+      </div>
+    </div>
+  </footer>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/5a227051d0795768aaf8cefe/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>
