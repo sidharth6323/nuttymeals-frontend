@@ -111,11 +111,11 @@ input:focus,textarea:focus
   .section2 .section2-container img
   {
     width: 50px!important;
-  }  
+  }
   .section2 .section2-container .section2-inner h2
   {
     font-size: 1.7em!important;
-  }  
+  }
   .section2 .header
   {
     padding: 3.8% 2%!important;
@@ -692,7 +692,7 @@ nav .top-menu-container
 .section1
 {
   background: url('../img/main-back.jpg');
-  min-height: 500px; 
+  min-height: 500px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -708,6 +708,7 @@ nav .top-menu-container
 {
   display: inline-block;
   width: 50%;
+  text-align: center;
   padding-top: 2%;
 }
 .section1 .section1-content h1
@@ -778,7 +779,7 @@ nav .top-menu-container
 .section1 .section1-content .app .app-item.ios .icon
 {
   margin: 0 20% 0 0;
-} 
+}
 .section2
 {
     width: 88%;
