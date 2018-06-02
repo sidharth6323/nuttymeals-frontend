@@ -58,7 +58,7 @@ app.controller("mainCtrl",function($scope,$http){
       $scope.activeTestimony=1;
     }
     $scope.$apply();
-  },3000);
+  },5000);
 
   $scope.scroll_to = function(section){
       $('html, body').animate({

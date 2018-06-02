@@ -780,6 +780,10 @@ nav .top-menu-container
 {
   width: 50%;
 }
+.section2 .corp-text p
+{
+  font-size: 1.15em;
+}
 .section2 .corp-text strong
 {
   font-weight: bolder;
@@ -795,7 +799,7 @@ nav .top-menu-container
 .section3 .header h1{
   font-size: 3em;
     /* text-align: center; */
-    margin-bottom: 3%;
+    margin-bottom: 1%;
     font-family: 'brandon';
     font-weight: bolder;
 }
@@ -818,11 +822,12 @@ nav .top-menu-container
 {
   display: inline;
   font-weight: bolder;
+  width: 80%;
   font-size: 1.3em;
 }
 .section3 .content .text-content .why h4 span
 {
-  font-weight: normal;
+  font-weight: bold;
   font-size: 0.8em;
 }
 .section3 .content .text-content .why img
@@ -842,6 +847,7 @@ nav .top-menu-container
 }
 .section3 .content .image-content img
 {
+  margin-top: 8%;
   width: 100%;
 }
 .section4
