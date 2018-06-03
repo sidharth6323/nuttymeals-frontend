@@ -28,9 +28,13 @@ app.controller("mainCtrl",function($scope,$http){
   });
 
   $scope.loginLoading = 0;
+  $scope.name="";
+  $scope.email="";
+  $scope.phone="";
+  $scope.address="";
 
-  //$scope.api_domain = "http://nuttymeals.nhh6b7byn2.us-west-2.elasticbeanstalk.com";
-  $scope.api_domain = "http://localhost:8000"
+  $scope.api_domain = "http://nuttymeals.nhh6b7byn2.us-west-2.elasticbeanstalk.com";
+  //$scope.api_domain = "http://localhost:8000"
 
   $scope.activeTestimony=1;
   $scope.initApp = function(){
@@ -67,7 +71,23 @@ app.controller("mainCtrl",function($scope,$http){
 
   }
 
-
+  $scope.send_corp_enquiry=function(){
+    if($scope.name.length==0 || $scope.email.length==0 || $scope.phone.length==0 || $scope.address.length==0)
+    {
+      alert("Please fill all the mandatory fields");
+      return;
+    }
+    $http({
+      method:"POST",
+      url : $scope.api_domain + "/api/send_corporate_request",
+      data : {name:$scope.name,email:$scope.email,phone:$scope.phone,address:$scope.address,message:$scope.message},
+    }).then(function(response){
+      alert("Your request for the corporate plan is submitted. We will get back to you soon. :)")
+    },function(){
+      console.log("didn't send enquiry");
+      alert("Error submitting request")
+    });
+  }
   $scope.map = { center: { latitude: 12.9020326, longitude: 77.5202511 }, zoom: 19 };
   $scope.marker = {
     id: 0,
