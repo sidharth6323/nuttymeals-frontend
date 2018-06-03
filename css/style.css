@@ -746,6 +746,7 @@ nav .top-menu-container
     display: inline-flex!important;
     align-items: center;
     transition: all ease-in-out 0.15s;
+    box-shadow: 2px 2px 11px 2px rgba(173, 50, 50, 0.34);
 }
 .section1 .boxinput-container:hover
 {
