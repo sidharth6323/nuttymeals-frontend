@@ -108,10 +108,34 @@ input:focus,textarea:focus
   .section2
   {
     height: auto!important;
-    margin-top: -15%!important;
+    margin-top: 0%!important;
     background: orange;
     width: 100%!important;
-    padding: 7% 3%!important;
+    padding: 7% 0%!important;
+    padding-bottom: 12%!important;
+  }
+  .section2 .corp-text
+  {
+    width: 100%!important;
+    text-align: center;
+    padding: 0 6%;
+    font-size: 90%;
+  }
+  .section3 .content
+  {
+    flex-direction: column;
+  }
+  .section3 .content .text-content
+  {
+    width: 100%!important;
+  }
+  .section3 .content .text-content .why img
+  {
+    width: 60px!important;
+  }
+  .section3 .content .image-content
+  {
+    width: 90%!important;
   }
   .section2 .section2-container img
   {
@@ -147,13 +171,18 @@ input:focus,textarea:focus
   {
     flex-direction: column;
   }
-  .poster-section .flip-container, .front, .back
-  {
-    margin: 3% 0!important;
-  }
   .section4
   {
     height: auto!important;
+    font-size: 80%;
+  }
+  .section4 .card
+  {
+    //height: auto!important;
+    min-height: 264px!important;
+    position: relative;
+    top: 12px;
+    padding-bottom: 9%;
   }
   .section4 .header
   {
@@ -170,6 +199,24 @@ input:focus,textarea:focus
   .section4 .content .timings {
     width: 85%!important;
     margin: 2% auto 6%!important;
+  }
+  .section5
+  {
+    margin-top: 6%;
+    padding: 3% 10% 6%!important;
+  }
+  .section5 form
+  {
+    width: 90%!important
+  }
+  .section4 .testimony
+  {
+    display: flex;
+    flex-direction: column;
+  }
+  .section5 .container
+  {
+    flex-direction: column;
   }
   .section5 .content .card
   {
@@ -1099,7 +1146,22 @@ footer .footer2 .social i
 {
   .section1
   {
-    background-size: 900% 100%!important;
+    padding: 7% 4%;
+    height: auto;
+  }
+  .section1 .container
+  {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: auto;
+    height: auto;
+    top:0px;
+    position: static;
+  }
+  .section1 .container .card
+  {
+    width: 92%;
   }
   .section1 .section1-content
   {
@@ -1122,7 +1184,7 @@ footer .footer2 .social i
   {
     flex-direction: column;
     align-items: center;
-    margin-bottom: 10%!important;
+    margin-bottom: 0%!important;
   }
   .section3 .about-img
   {
@@ -1135,6 +1197,10 @@ footer .footer2 .social i
   .section3 .about-img img {
     width: 100%;
     margin-left: 14%;
+  }
+  .section4
+  {
+    padding-top: 0!important;
   }
   .section5 .content {
     flex-direction: column;
